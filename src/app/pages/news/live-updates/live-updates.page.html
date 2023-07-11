@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>Live Updates</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+
+
+  <div *ngFor="let news of newsData">
+    <app-url-post [postData]="news" [edit]="{'check':'false'}" [news_id]="news._id" [time]="news.createdAt" [newsData]="news.news" [type]="{'type':'small'}"></app-url-post>
+  </div>
+
+  <div class="ion-no-margin" *ngIf="!newsData.length">
+    <app-no-data-found [name]="{'name':'No live updates as for now'}" ></app-no-data-found>
+  </div> 
+
+
+</ion-content>

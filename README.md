@@ -1,1 +1,1 @@
-# GuglaNews-App
+# Gugla News app

@@ -1,0 +1,51 @@
+
+<ion-content>
+<div class="grid_type" *ngIf="!villages_gps.length; else locations">
+        <ion-card>
+            <ion-skeleton-text animated style="height:160px"></ion-skeleton-text>
+        </ion-card>
+        <ion-grid>
+            <ion-row class="ion-no-padding" *ngFor="let i of [0]">
+                <ion-col *ngFor="let j of [0]">
+                    <ion-skeleton-text animated style="width:100%"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width:100%"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width:100%"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width:100%"></ion-skeleton-text>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+ <ng-template #locations>
+
+   <ion-item style="padding: 16px 0 0 0;" lines="full">
+     <h2 style="margin: 0 0 0 10px;">
+       Select Your Location
+     </h2>
+     <ion-buttons style="position: absolute; right: 8px">
+       <ion-button (click)="dismissModal()"
+         ><ion-icon style="font-size: 24px;" name="close"></ion-icon
+       ></ion-button>
+     </ion-buttons>
+   </ion-item>
+
+   <ion-list *ngIf="villages_gps.length > 0">
+        <ion-item
+          *ngFor="let item of villages_gps"
+          (click)="continue(item._id)"
+        > 
+          <ion-icon name="locate"></ion-icon>
+          <ion-label class="ion-text-wrap">
+            <ion-text
+              >{{item.name}}<br />{{item.mandal.name}},{{item.mandal.district.name}}-{{item.pincode}}</ion-text
+            >
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <div class="ion-no-margin" *ngIf="villages_gps.length == 0">
+        <app-no-data-found [name]="{'name':'this location is not available'}" ></app-no-data-found>
+      </div> 
+      
+
+</ng-template>
+</ion-content>

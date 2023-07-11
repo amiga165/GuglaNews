@@ -1,0 +1,171 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="back()">
+      <ion-button>
+        <ion-icon name="arrow-back-outline"></ion-icon>      
+      </ion-button>
+    </ion-buttons>
+    <ion-title>OTP Verification</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding style="margin-top: 10%">
+  <div
+    style="
+      text-align: center;
+      font-size: 15px;
+      padding: 30px 0 0 0;
+      color: #40405e;
+      width: 80%;
+      margin: 0 auto;
+    "
+  >
+    <ion-icon name="chatbox-ellipses" style="font-size: 3em"></ion-icon>
+    <br />
+    Enter OTP <br />
+    We have sent OTP via SMS to
+    <br />
+    <b>{{commin.langData.MOBILE_NO}} +91 {{formData.mobile_num}} </b>&nbsp;
+    <ion-icon
+      name="create"
+      (click)="dismiss()"
+      style="font-size: 23px; position: relative; top: 5px"
+    ></ion-icon>
+</div>
+
+  <h6 style="text-align: center; color: #8888a5">
+    {{commin.langData.TO_ENJOY_MEEBUDDY_SERVICES_VERIFY_YOUR_MOBILE_NUMBER}}
+  </h6>
+
+  <div id="divOuter">
+    <div id="divInner" style="text-align: center">
+      <p style="text-align: center; font-weight: bolder">
+        <!-- {{commin.langData.OTP}} -->
+      </p>
+      <ion-row>
+        <ion-col>
+          <!-- <ion-input
+       
+            type="tel"
+            required="true"
+            
+            [(ngModel)]="formData.otp"
+          >
+          </ion-input> -->
+
+           <ion-input id='otpinput' type="tel" pattern="[0-9.]+"  placeholder="Enter OTP" maxLength="6" class="ion-margin-bottom" [(ngModel)]="formData.otp" (keyup)="validateOTP()"></ion-input>
+
+          <!-- <ion-input
+            class="otp-input"
+            type="tel"
+            #otp1
+            required="true"
+            maxLength="1"
+            [ngClass]="{ 'otp-focus' : OTP[0].focus }"
+            [(ngModel)]="OTP[0].value"
+            (keyup)="otpController($event, null, otp1, otp2, 1)"
+            (ionFocus)="focus(0)"
+            (ionBlur)="blur(0)"
+          >
+          </ion-input>
+          <ion-input
+            class="otp-input"
+            type="tel"
+            #otp2
+            required="true"
+            maxLength="1"
+            [ngClass]="{ 'otp-focus' : OTP[1].focus }"
+            [(ngModel)]="OTP[1].value"
+            (keyup)="otpController($event, otp1, otp2, otp3, 2)"
+            (ionFocus)="focus(1)"
+            (ionBlur)="blur(1)"
+          >
+          </ion-input>
+          <ion-input
+            class="otp-input"
+            type="tel"
+            #otp3
+            required="true"
+            maxLength="1"
+            [ngClass]="{ 'otp-focus' : OTP[2].focus }"
+            [(ngModel)]="OTP[2].value"
+            (keyup)="otpController($event, otp2, otp3, otp4, 3)"
+            (ionFocus)="focus(2)"
+            (ionBlur)="blur(2)"
+          >
+          </ion-input>
+
+          <ion-input
+            class="otp-input"
+            type="tel"
+            #otp4
+            required="true"
+            maxLength="1"
+            [ngClass]="{ 'otp-focus' : OTP[3].focus }"
+            [(ngModel)]="OTP[3].value"
+            (keyup)="otpController($event, otp3, otp4, otp5, 4)"
+            (ionFocus)="focus(3)"
+            (ionBlur)="blur(3)"
+          >
+          </ion-input>
+
+          <ion-input
+            class="otp-input"
+            type="tel"
+            #otp5
+            required="true"
+            maxLength="1"
+            [ngClass]="{ 'otp-focus' : OTP[4].focus }"
+            [(ngModel)]="OTP[4].value"
+            (keyup)="otpController($event, otp4, otp5, otp6, 5)"
+            (ionFocus)="focus(4)"
+            (ionBlur)="blur(4)"
+          >
+          </ion-input>
+
+          <ion-input
+            class="otp-input"
+            type="tel"
+            #otp6
+            required="true"
+            maxLength="1"
+            [ngClass]="{ 'otp-focus' : OTP[5].focus }"
+            [(ngModel)]="OTP[5].value"
+            (keyup)="otpController($event, otp5, otp6, null, 6)"
+            (ionFocus)="focus(5)"
+            (ionBlur)="blur(5)"
+          >
+          </ion-input> -->
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+  <br />
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    "
+  >
+    <ion-button
+      block
+      class="top"
+      (click)="verify()"
+      [disabled]="!validateOTP()"
+      style="width: 75%; margin: 0 auto; background: pink"
+      >Verify</ion-button
+    >
+    <!-- {{commin.langData.VERIFY}} -->
+
+    <!-- <ion-button class="btn-bg" block class="top" 
+      >Resend OTP</ion-button
+    > -->
+
+    <br />
+    <p (click)="resend()"><br>Didn't recieve the OTP?</p>
+    <!-- {{commin.langData.RESEND_OTP}} -->
+  </div>
+</ion-content>

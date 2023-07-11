@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="myBackButton()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-text>
+    <h2>Your Communities</h2>
+    <ion-button (click)="createpost()">Create post</ion-button>
+    <h3 *ngIf="community_data">You have no communities.</h3>
+  </ion-text>
+  <!-- <ion-buttons slot=end> -->
+  <!-- </ion-buttons> -->
+
+  <!-- "members": [], "join_requests": [], "posts": [], -->
+
+  <div *ngFor="let j of community_data">
+    <ion-item>
+      <ion-avatar slot="start"><img src="{{j.icon}}" /></ion-avatar>
+      <ion-label>{{j.name}}</ion-label>
+      <ion-label slot="end">{{j.type}}</ion-label>
+    </ion-item>
+    <div class="card">
+      <div>
+        <h2>Posts</h2>
+        <h1 style="text-align: center">{{j.posts.length}}</h1>
+      </div>
+      <div>
+        <h2>Users</h2>
+        <h1 style="text-align: center">{{j.members.length}}</h1>
+      </div>
+      <div>
+        <h2>Pending</h2>
+        <h1 style="text-align: center">{{j.join_requests.length}}</h1>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,145 @@
+<ion-content>
+<div class="grid_type" *ngIf="preloader; else newsblock">
+        <ion-card>
+            <ion-skeleton-text animated style="height:160px"></ion-skeleton-text>
+        </ion-card>
+        <ion-grid>
+            <ion-row class="ion-no-padding" *ngFor="let i of [0]">
+                <ion-col *ngFor="let j of [0]">
+                    <ion-skeleton-text animated style="width:100%"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width:100%"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width:100%"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width:100%"></ion-skeleton-text>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+ <ng-template #newsblock>
+
+<div class="slide-outlet-fit" >
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content> 
+  </ion-refresher>
+
+            <ion-list class="ion-no-padding ion-no-margin">
+                
+                <ion-slides [options]="slideOpts" (ionSlideDidChange)='slideChanged($event)' (ionSlideReachEnd)="moreData($event)" (ionSlideReachStart)="refreshnew($event)">
+                    <ng-container *ngFor="let slide of all_news_data" >
+
+                        <ion-slide *ngIf="slide.type=='ImagePost'">
+                            <app-image-post [newsData]="slide.news" [postData]="slide" [time]="slide.createdAt" [edit]="{'check':'false'}"  [type]="{'type':'large'}" [news_id]="slide._id" (click)="tabopenclose()"></app-image-post>
+                            <app-news-slide-footer [newsData]="slide"></app-news-slide-footer>
+                      </ion-slide>
+
+                        <ion-slide *ngIf="slide.type=='VideoPost'">
+                            <app-video-post [newsData]="slide.news" [postData]="slide" [edit]="{'check':'false'}"  [type]="{'type':'large'}" [news_id]="slide._id" (click)="tabopenclose()"></app-video-post>
+                            <app-news-slide-footer [newsData]="slide"></app-news-slide-footer>
+                        </ion-slide>
+
+                        <ion-slide *ngIf="slide.type=='URLPost'">
+                            <div class="next-btn">
+                                <button (click)="prevSlide()"> <ion-icon name="arrow-up-outline"></ion-icon> </button>
+                                <button (click)="nextSlide()"> <ion-icon name="arrow-down-outline"></ion-icon> </button>
+                            </div>
+
+                            <app-url-post [newsData]="slide.news" [postData]="slide" [time]="slide.createdAt" [edit]="{'check':'false'}"  [type]="{'type':'large'}" [news_id]="slide._id" (click)="tabopenclose()"></app-url-post>
+                            <app-news-slide-footer [newsData]="slide"></app-news-slide-footer>
+                        </ion-slide> 
+
+                        <ion-slide *ngIf="slide.type=='Poll'">
+                            <app-poll-post [newsData]="slide.news" [postData]="slide" [time]="slide.createdAt" [news_id]="slide._id" [type]="{'type':'large'}"  (click)="tabopenclose()"></app-poll-post>
+                        <app-news-slide-footer [newsData]="slide"></app-news-slide-footer>
+                        </ion-slide> 
+
+                        <ion-slide *ngIf="slide.type=='Magazine'">
+                            <app-magazine-post [newsData]="slide.news" [postData]="slide" [edit]="{'check':'false'}"  [time]="slide.createdAt" [news_id]="slide._id" [type]="{'type':'large'}" (click)="tabopenclose()"></app-magazine-post>
+                            <app-news-slide-footer [newsData]="slide"></app-news-slide-footer>
+                        </ion-slide>
+
+                        <ion-slide *ngIf="slide.type=='Quiz'" >
+                            <app-quiz-post [newsData]="slide.news" [postData]="slide" [time]="slide.createdAt" [news_id]="slide._id" [type]="{'type':'large'}"></app-quiz-post>
+                            <app-news-slide-footer [newsData]="slide"></app-news-slide-footer>
+                        </ion-slide>
+
+
+                        <ion-slide *ngIf="slide.type=='Survey'">
+                            <app-survey-post [newsData]="slide.news" [postData]="slide" [time]="slide.createdAt" [news_id]="slide._id" [type]="{'type':'large'}" ></app-survey-post>
+                            <app-news-slide-footer [newsData]="slide"></app-news-slide-footer>
+                        </ion-slide>
+
+                    </ng-container>
+                </ion-slides>
+
+
+                <!-- <swiper
+                direction="vertical"
+                [effect]="'coverflow'"
+                [grabCursor]="true"
+                [centeredSlides]="true"
+                [slidesPerView]="'auto'"
+                [coverflowEffect]="{
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true
+                }"
+                class="mySwiper"
+                (slideChange)="slideChanged($event)"
+                 (slideResetTransitionEnd)="moreData($event)" 
+                
+
+                >
+                <ng-container *ngFor="let slide of all_news_data" >
+
+                    <ng-template swiperSlide *ngIf="slide.type=='ImagePost'">
+                        <app-image-post [newsData]="slide.news" [postData]="slide" [time]="slide.createdAt" [edit]="{'check':'false'}"  [type]="{'type':'large'}" [news_id]="slide._id" (click)="tabopenclose()"></app-image-post>
+                        <app-news-slide-footer [newsData]="slide"></app-news-slide-footer>
+                    </ng-template>
+
+                    <ng-template swiperSlide *ngIf="slide.type=='VideoPost'">
+                        <app-video-post [newsData]="slide.news"  [edit]="{'check':'false'}"  [type]="{'type':'large'}" [news_id]="slide._id" (click)="tabopenclose()"></app-video-post>
+                        <app-news-slide-footer [newsData]="slide"></app-news-slide-footer>
+                    </ng-template>
+
+                    <ng-template swiperSlide *ngIf="slide.type=='URLPost'">
+                        <div class="next-btn">
+                            <button (click)="prevSlide()"> <ion-icon name="arrow-up-outline"></ion-icon> </button>
+                            <button (click)="nextSlide()"> <ion-icon name="arrow-down-outline"></ion-icon> </button>
+                        </div>
+
+                        <app-url-post [newsData]="slide.news" [time]="slide.createdAt" [edit]="{'check':'false'}"  [type]="{'type':'large'}" [news_id]="slide._id" (click)="tabopenclose()"></app-url-post>
+                        <app-news-slide-footer [newsData]="slide"></app-news-slide-footer>
+                    </ng-template>
+
+                    <ng-template swiperSlide *ngIf="slide.type=='Poll'">
+                        <app-poll-post [newsData]="slide.news" [time]="slide.createdAt" [news_id]="slide._id" [type]="{'type':'large'}" ></app-poll-post>
+                        <app-news-slide-footer [newsData]="slide"></app-news-slide-footer>
+                    </ng-template>
+
+                    <ng-template swiperSlide *ngIf="slide.type=='Quiz'">
+                        <app-quiz-post [newsData]="slide.news" [time]="slide.createdAt" [news_id]="slide._id" [type]="{'type':'large'}"></app-quiz-post>
+                        <app-news-slide-footer [newsData]="slide"></app-news-slide-footer>
+                    </ng-template>
+
+                    <ng-template swiperSlide *ngIf="slide.type=='Survey'">
+                        <app-survey-post [newsData]="slide.news" [time]="slide.createdAt" [news_id]="slide._id" [type]="{'type':'large'}" ></app-survey-post>
+                        <app-news-slide-footer [newsData]="slide"></app-news-slide-footer>
+                    </ng-template>
+
+                </ng-container>
+
+            </swiper> -->
+            </ion-list>
+            
+      
+          </div>
+
+
+      </ng-template>
+
+
+
+      
+</ion-content>

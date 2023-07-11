@@ -1,0 +1,199 @@
+<ion-header scroll="true" class="ion-no-border">
+  <ion-toolbar no-border>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <img src="assets/fests/home/menu.svg"  style="    position: absolute;
+        left: 0;
+        z-index: 1;
+        height: 20px;
+        opacity: 0.9;"/>
+        <img src="assets/fests/teckzite/Teckzite'23.png" />
+      </ion-button>
+    </ion-buttons>
+
+    <!-- <ion-title> Teckzite </ion-title> -->
+
+    <!-- <ion-buttons slot="end">
+      <ion-button>
+        <img src="assets/fests/home/notification.svg" />
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [scrollable]="true" [(ngModel)]="segmentTabActive">
+    <ion-segment-button value="events">
+      <ion-text>Events</ion-text>
+    </ion-segment-button>
+    <ion-segment-button value="workshops">
+      <ion-text>Workshops</ion-text>
+    </ion-segment-button>
+    <ion-segment-button value="updates">
+      <ion-text>Live Updates</ion-text>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="segmentTabActive">
+
+    <!-- EVENTS -->
+    <ion-list  class="ion-no-padding ion-no-margin"  *ngSwitchCase="'events'">
+
+      <!-- ICONS LIST SLIDES -->
+      <div class="filter-slides">
+        <ion-slides style="    padding-left: 10px;" [options]="options">
+          <ion-slide *ngFor="let i of EventsListIcons">
+            <div (click)="fetchEvents(i.dept)" [ngClass]="{'active': i.dept == DeptActive }">
+              <ion-thumbnail >
+                <img [src]="i.img" alt="img" />
+              </ion-thumbnail>
+              <ion-text> {{i.name}} </ion-text>
+            </div>
+          </ion-slide>
+        </ion-slides>
+      </div>
+
+      <!-- FILTERED EVENTS LIST -->
+      <div  *ngIf="EventsList.length != 0">
+        <div class="event-card" *ngFor="let event of EventsList">
+          <img [src]="event.eveImg" />
+
+          <div class="info">
+            <div class="content">
+              <h6>{{event.eveName}}</h6>
+              <p class="team">
+                <span><ion-icon name="people"></ion-icon>&nbsp;&nbsp;Team Size : {{event.maxTeam}}</span>
+              </p>
+              <p class="cash"><ion-icon name='cash'></ion-icon>&nbsp;&nbsp;Prize Money : {{event.prizeMoney}}</p>
+            </div>
+            <div (click)="redirectToViewEvent(event.eveDepartment, event.sno)" class="indicator">
+              <div>view</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div  *ngIf="EventsList.length == 0">
+        <app-no-data-found [name]="{'name':'Events are not there to this department'}"></app-no-data-found>
+      </div>
+    </ion-list>
+
+    <!-- WORKSHOPS -->
+    <ion-list class="ion-no-padding ion-no-margin" *ngSwitchCase="'workshops'">
+      <!-- ALL WORKSHOPS LIST -->
+      <div  *ngIf="WorkshopsList.length != 0">
+        <div class="event-card" *ngFor="let ws of WorkshopsList">
+         <div class="img-tag">
+          <img [src]="ws.photo" />
+         </div>
+
+          <div class="info">
+            <div class="content" >
+              <h6>{{ws.wrk_name}}</h6>
+              <p class="team">
+                <span><ion-icon name="people"></ion-icon>&nbsp;&nbsp;For Department : {{ws.branch | uppercase}}</span>
+              </p>
+              <p class="team">
+                <span><ion-icon name="alarm"></ion-icon>&nbsp;&nbsp;Duration : {{ws.duration}}</span>
+              </p>
+              <p class="cash"><ion-icon name='cash'></ion-icon>&nbsp;&nbsp;Participation Amount : {{ws.amount}}</p>
+            </div>
+            <div (click)="redirectToViewWorkshop(ws.sno)" class="indicator">
+              <div>view</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div  *ngIf="WorkshopsList.length == 0">
+        <app-no-data-found [name]="{'name':'Workshops are not there as of now!!!'}"></app-no-data-found>
+      </div>
+
+    </ion-list>
+
+    <!-- LIVE UPDATES -->
+    <ion-list class="ion-no-padding ion-no-margin"  *ngSwitchCase="'updates'">
+      <div *ngFor="let slide of all_news_data">
+        <div *ngIf="slide.type=='ImagePost'">
+          <app-image-post
+            [postData]="slide"
+            [newsData]="slide.news"
+            [time]="slide.createdAt"
+            [edit]="{'check':'false'}"
+            [news_id]="slide._id"
+            [type]="{'type':'small'}"
+          ></app-image-post>
+        </div>
+  
+        <div *ngIf="slide.type=='VideoPost'">
+          <app-video-post
+            [postData]="slide"
+            [newsData]="slide.news"
+            [time]="slide.createdAt"
+            [edit]="{'check':'false'}"
+            [news_id]="slide._id"
+            [type]="{'type':'small'}"
+          ></app-video-post>
+        </div>
+  
+        <div *ngIf="slide.type=='URLPost'">
+          <app-url-post
+            [postData]="slide"
+            [newsData]="slide.news"
+            [time]="slide.createdAt"
+            [edit]="{'check':'false'}"
+            [news_id]="slide._id"
+            [type]="{'type':'small'}"
+          ></app-url-post>
+        </div>
+  
+        <div *ngIf="slide.type=='Poll'">
+          <app-poll-post
+            [postData]="slide"
+            [newsData]="slide.news"
+            [time]="slide.createdAt"
+            [news_id]="slide._id"
+            [type]="{'type':'small'}"
+          ></app-poll-post>
+        </div>
+  
+        <div *ngIf="slide.type=='Magazine'">
+          <app-magazine-post
+            [postData]="slide"
+            [newsData]="slide.news"
+            [edit]="{'check':'false'}"
+            [time]="slide.createdAt"
+            [news_id]="slide._id"
+            [type]="{'type':'small'}"
+          ></app-magazine-post>
+        </div>
+  
+        <div *ngIf="slide.type=='Quiz'">
+          <app-quiz-post
+            [postData]="slide"
+            [newsData]="slide.news"
+            [time]="slide.createdAt"
+            [news_id]="slide._id"
+            [type]="{'type':'small'}"
+          ></app-quiz-post>
+        </div>
+  
+        <div *ngIf="slide.type=='Survey'">
+          <app-survey-post
+            [postData]="slide"
+            [newsData]="slide.news"
+            [time]="slide.createdAt"
+            [news_id]="slide._id"
+            [type]="{'type':'small'}"
+          ></app-survey-post>
+        </div>
+      </div>
+  
+      <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+        <ion-infinite-scroll-content
+          loadingText="Please wait..."
+          loadingSpinner="bubbles"
+        ></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-list>
+  </div>
+</ion-content>

@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Current present news</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let i of local_news">
+            <ion-thumbnail slot=start>
+                <img src="{{i.news.image_urls}}" />
+            </ion-thumbnail>
+            <ion-label>
+                <h3>{{i.news.title}}</h3>
+                <p>{{i.news.description}}</p>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

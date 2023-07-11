@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Quiz</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-list style="height:100%; overflow-y: scroll;" *ngIf="preloader; else skeleton">
+
+  <ion-slides [options]="options">
+    <ion-slide *ngFor="let i of [1,2,3,4,5]">
+        <ion-avatar>
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-item *ngFor="let item of [1, 2, 3, 4, 5, 6, 7]">
+    <ion-thumbnail slot="start">
+      <ion-skeleton-text animated></ion-skeleton-text>
+    </ion-thumbnail>
+
+    <ion-label class="ion-no-padding">
+        <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text>
+    </ion-label>
+  </ion-item>
+</ion-list>
+
+<ng-template #skeleton>
+
+  <ion-content>
+  
+    <ion-slides [options]="options">
+
+      <div class="slide-bar" (click)='PostFilter("all","all")'>
+            
+            <ion-avatar [ngClass]="{'active-nav' : active == 'all'}">
+              <!-- <p class="notifications"><span>10</span></p>   -->
+               
+            </ion-avatar>
+  
+            <!-- <ion-thumbnail>
+              <p class="notifications"><span>10+</span></p> 
+              <ion-icon name="megaphone-outline"></ion-icon>       
+            </ion-thumbnail> -->
+  
+            <p style="font-size: 1.2em;
+            position: absolute;
+            margin: 10px;"><span>All</span></p>
+          </div>
+
+      <!-- <ion-slide *ngFor="let i of categories; index as a">
+        
+          <div class="slide-bar" (click)='PostFilter(i._id,"")'>
+            
+            <ion-avatar [ngClass]="{'active-nav' : a == active}">
+              <p class="notifications"><span>10</span></p>  
+              <img *ngIf="i.icon" [src]="i.icon" alt="icon"> 
+            </ion-avatar>
+  
+            <p style="font-size: .7em;"><span>{{i.name}}</span></p>
+          </div>
+       
+      </ion-slide> -->
+    </ion-slides>
+  
+    <div *ngFor="let news of filterposts">
+      <app-quiz-post [postData]="news" [newsData]="news.news" [time]="news.createdAt" [type]="{'type':'small'}" [news_id]="news._id"></app-quiz-post>
+    </div>
+    
+  </ion-content>
+</ng-template>

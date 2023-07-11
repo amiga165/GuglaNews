@@ -1,0 +1,26 @@
+.swiper-slide {
+    display: block;
+}
+
+.swiper-slide img {
+    height: 100%;
+    width: 100%;
+}
+
+
+.slide-outlet-fit{
+
+    height: 100vh;
+    overflow-y: scroll;
+
+    ion-list{
+        height: 100%;
+
+        ion-slides{
+            height: 100%;
+            width: 100%;
+        }
+
+    }
+
+}

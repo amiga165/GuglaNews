@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>Categories</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+<ion-content>
+
+<div class="grid_type" *ngIf="!categoryData.length; else categories">
+        <ion-card>
+            <ion-skeleton-text animated style="height:160px"></ion-skeleton-text>
+        </ion-card>
+        <ion-grid>
+            <ion-row class="ion-no-padding" *ngFor="let i of [0]">
+                <ion-col *ngFor="let j of [0]">
+                    <ion-skeleton-text animated style="width:100%"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width:100%"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width:100%"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width:100%"></ion-skeleton-text>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+ <ng-template #categories>
+
+
+  
+    <ion-card style="margin: 12px;padding: 8px;">
+        <ion-list style="padding-right: 8px;padding-bottom: 24px;">
+            <!-- <div><div style="width: 100%;height: 1px;background: #dcdbdb;"></div></div> -->
+            <div>
+                <p style="margin: 10px 8px;font-weight: 500;color: var(--ion-color-medium-tint);">Select any Categories</p>
+            </div>
+            <div class="categories-list">
+                <div  *ngFor="let catgy of categoryData">
+                    <ion-chip 
+                    (click)="view_category(catgy._id,catgy.name)"
+                >
+                    <img src="assets/post/Image.svg" alt="icon">
+                    <ion-label >{{catgy.name}}</ion-label>
+                </ion-chip>
+                </div>
+            </div>
+        </ion-list>
+    </ion-card>
+
+      
+</ng-template>
+</ion-content>

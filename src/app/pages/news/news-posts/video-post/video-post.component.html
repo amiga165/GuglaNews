@@ -1,0 +1,161 @@
+<div *ngIf="type.type == 'large'">
+    <div class="head-vid" *ngIf="newsData.video_type == 'uploaded'">
+        <ion-slides>
+            <ion-slide *ngFor="let img of newsData.video_urls">
+                <video controls>
+                    Your browser does not support the &lt;video&gt; tag.
+                    <source src="{{ img }}" />
+                </video>
+            </ion-slide>
+        </ion-slides>
+    </div>
+
+    <div class="head-vid" *ngIf="newsData.video_type == 'youtube'">
+        <ion-slides >
+            <ion-slide *ngFor="let img of newsData.video_urls">
+                <!-- <div class="video">
+        <img [src]='getyoutubevideoimage(img)'>
+             <div class="centered" (click)="playVideo(img)"><img src="https://meebuddy.com/app_files/video_play_btn.png" style="height: 50px;"><p style="color:white;">Click to Play</p></div>
+           
+        </div>   -->
+                <iframe [src]="get(img)" width="100%" height="315" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </ion-slide>
+        </ion-slides>
+    </div>
+
+    <div class="content" *ngIf="!newsData.full_size">
+        <ion-card-header>
+            <!-- <div class="timeStamp" style="text-align: left;">{{datetime(newsData.createdAt)}}</div> -->
+            <div *ngIf="postData.level == 'mandal' || postData.level == 'district'">
+                <div class="category" *ngIf="postData.category"
+                    (click)="view_category(postData.category._id, postData.category.name)">
+                    <p style="float: left; display: inline; margin: 0">
+                        <img class="profile_icon"
+                            src="data:image/png;base64,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" />
+                    </p>
+                    <p style="
+              display: inline;
+              float: left;
+              padding-left: 5px;
+              margin: 0;
+              text-align: left;
+            ">
+                        {{ postData.posted_by.name
+                        }}<ion-icon *ngIf="postData.posted_by.green_icon" class="badge"
+                            name="checkmark-sharp"></ion-icon><br />{{ postData.posted_by.reporter_type }}
+                    </p>
+                </div>
+                <div class="leveldiv" style="text-align: left; text-transform: capitalize">
+                    {{ postData.level }} News<br />
+                    <ion-icon slot="start" name="location"></ion-icon><span *ngIf="postData.level == 'mandal'">{{
+                        center.location.mandal
+                        }}</span><span *ngIf="postData.level == 'district'">{{
+                        center.location.district
+                        }}</span>
+                </div>
+            </div>
+
+            <div style="
+          height: 12px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          padding-bottom: 8px;
+        ">
+                <div style="background: white; border-radius: 3px">
+                    <img src="assets/icon/logo_b.png" style="width: 82px; padding: 0 3px 4px 4px" />
+                </div>
+            </div>
+
+            <ion-card-title style="font-size: 20px; font-weight: 700; text-align: left" class="ion-text-wrap">{{
+                newsData.title }}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content style="
+        overflow-y: scroll;
+        text-align: left;
+        font-size: 17px;
+        font-weight: 400;
+      " [innerHTML]="newsData.description"></ion-card-content>
+    </div>
+    <div *ngIf="newsData.ad_image" class="ads" style="left: 0">
+        <div>Ad</div>
+        <img [src]="newsData.ad_image" alt="Ads post" />
+    </div>
+    <div class="timeStamp" style="text-align: right">
+        <ion-icon name="time-outline"></ion-icon>{{ datetime(postData.createdAt) }}
+    </div>
+</div>
+
+<div *ngIf="type.type == 'small'">
+    <div *ngIf="!isDeleted">
+        <ion-list>
+            <ion-item style="cursor: pointer" detail>
+                <ion-thumbnail class="ion-margin-end" (click)="redirectToViewNews()">
+                    <div *ngIf="newsData.video_type == 'youtube'">
+                        <ion-img [src]="getyoutubevideoimage(newsData.video_urls[0])"></ion-img>
+                    </div>
+                    <div *ngIf="newsData.video_type == 'uploaded'">
+                        <ion-img src="https://meebuddy.com/app_files/video_icon.jpg"></ion-img>
+                    </div>
+                    <!-- <ion-img *ngIf="img" src={{newsData.video_urls[0]}}></ion-img> -->
+                </ion-thumbnail>
+                <ion-label class="ion-text-wrap" (click)="redirectToViewNews()">
+                    <ion-text class="wrap">
+                        {{ newsData.title }}
+                    </ion-text>
+                    <p style="margin: 0; padding: 0; font-size: 0.75em">
+                        {{ common.stringAsDate(time) }}
+                    </p>
+                </ion-label>
+
+                <button style="
+            color: red;
+            background: white;
+            border: 1px solid red;
+            border-radius: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2px 4px;
+            font-size: 0.8em;
+          " *ngIf="edit.check == 'true'">
+                    <span (click)="presentAlertConfirm(news_id)">Delete</span>
+                </button>
+
+                <button style="
+            color: #b00376;
+            background: white;
+            border: 1px solid #b00376;
+            border-radius: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2px 4px;
+            font-size: 0.8em;
+          " *ngIf="edit.check == 'true'">
+                    <span (click)="presentAlertEdit()">Edit</span>
+                </button>
+
+                <button style="
+            color: green;
+            background: white;
+            border: 1px solid green;
+            border-radius: 2px;
+            padding: 2px 4px;
+            font-size: 0.8em;
+            position: absolute;
+            right: 36px;
+            bottom: 2px;
+          " *ngIf="edit.check == 'true'">
+                    <span *ngIf="postData.approval_status == 'posted'">Pending</span>
+                    <span *ngIf="postData.approval_status == 'verified'">Verified</span>
+                    <span *ngIf="postData.approval_status == 'rejected'">Rejected</span>
+                </button>
+            </ion-item>
+        </ion-list>
+    </div>
+</div>

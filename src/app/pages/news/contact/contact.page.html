@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="back()">
+      <ion-button>
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Contact Us</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="padding: 15px">
+    <div class="card-contact">
+      <ion-card>
+        <div>
+          <div class="flex-center">
+            <div>
+              <h2 style="margin: 0; font-size: 21px; padding-top: 10px">
+                Contact information
+              </h2>
+            </div>
+            <div>
+              <p style="font-size: 9px; padding: 0">
+                Say something for better services!
+              </p>
+            </div>
+          </div>
+          <div class="flex-center">
+            <div><img src="assets/contact/Phone.png" alt="phone" /></div>
+            <div>
+              <p><a href="tel:6304917180">6304917180</a></p>
+            </div>
+          </div>
+          <div class="flex-center">
+            <div><img src="assets/contact/Email.png" alt="Email" /></div>
+            <div>
+              <p>
+                <a href="mailto:guglanews@gmail.com"
+                  >guglanews@gmail.com</a
+                >
+              </p>
+            </div>
+          </div>
+          <div class="flex-center">
+            <div><img src="assets/contact/Location.png" alt="Location" /></div>
+            <div><p>Hyderabad</p></div>
+          </div>
+        </div>
+        <div class="flex-row">
+          <div><img src="assets/contact/Instagram.svg" alt="Instagram" /></div>
+          <div><img src="assets/contact/Facebook.svg" alt="Facebook" /></div>
+          <div><img src="assets/contact/Twitter.svg" alt="Twitter" /></div>
+          <div><img src="assets/contact/LinkedIn.svg" alt="LinkedIn" /></div>
+        </div>
+      </ion-card>
+    </div>
+
+    <!-- <ion-list>
+        <ion-item lines="none">
+          <ion-avatar>
+            <ion-icon class="icon" name="call-sharp"></ion-icon>
+          </ion-avatar>
+          <ion-label class="ion-no-margin">
+            <ion-text>Office Number</ion-text>
+            <p>
+          <a href="tel:6304917180">6304917180</a>
+          </p>
+          <p> <a href="https://wa.me/916304917180"><ion-icon name="logo-whatsapp" style='color:#128C7E;font-size: 25px;'></ion-icon></a></p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-avatar>
+            <ion-icon class="icon" name="location-sharp"></ion-icon>
+          </ion-avatar>
+          <ion-label class="ion-no-margin">
+            <ion-text>Mail Id</ion-text>
+            <p>
+            <a href="mailto:meebuddyindia@gmail.com">meebuddyindia@gmail.com</a>
+          </p>
+          </ion-label>         
+        </ion-item>
+      </ion-list> -->
+
+    <ion-list class="ion-margin">
+      <!-- SELECT DROPDOWN -->
+      <div>
+        <!-- <p></p> -->
+        <ion-select
+          placeholder="Please Select the type"
+          [(ngModel)]="formdata.message_type"
+        >
+          <ion-select-option>Complaint</ion-select-option>
+          <ion-select-option>Suggestion</ion-select-option>
+          <ion-select-option>Feedback</ion-select-option>
+          <ion-select-option>Message to Office</ion-select-option>
+          <ion-select-option>Others</ion-select-option>
+        </ion-select>
+      </div>
+
+      <!-- TEXTAREA FIELD -->
+      <div>
+        <ion-textarea
+          placeholder="Enter more information here..."
+          [(ngModel)]="formdata.message"
+        ></ion-textarea>
+      </div>
+    </ion-list>
+
+    <div style="display: flex; justify-content: center; align-items: center">
+      <button class="btn-inner-1" expand="block" (click)="submit()">
+        Send Message
+      </button>
+    </div>
+  </div>
+</ion-content>

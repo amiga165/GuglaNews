@@ -1,0 +1,143 @@
+.head-top {
+  margin-top: 62px !important;
+}
+.header {
+  min-height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  z-index: 102;
+
+  ion-buttons {
+    ion-button {
+      font-size: 0.75em;
+      ion-icon {
+        height: 20px;
+        width: 20px;
+      }
+    }
+  }
+  ion-text {
+    display: flex;
+    justify-content: center;
+    font-weight: 800;
+    width: 100%;
+  }
+
+  ion-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 90%;
+    border-radius: 15px;
+    ion-icon {
+      padding-left: 10px;
+      background: transparent;
+    }
+    input {
+      background: transparent;
+    }
+  }
+}
+
+.latest-slides {
+  ion-slide {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin-right: 0px !important;
+    margin-top: 16px;
+
+    .slides {
+      height: 120px;
+      width: 94%;
+      margin-bottom: 8px;
+
+      img {
+        border-radius: 4px;
+        width: 100%;
+        height: 100%;
+      }
+
+      ion-text {
+        position: relative;
+        top: -20px;
+        font-size: 0.62em;
+        left: -15px;
+      }
+    }
+  }
+}
+
+.filter-slides {
+  display: flex;
+  justify-content: center;
+  ion-slides {
+    width: 90%;
+    ion-slide {
+      display: flex;
+      justify-content: center;
+
+      ion-thumbnail {
+        --border-radius: 4px;
+      }
+
+      ion-text {
+        font-size: 0.6em;
+      }
+    }
+  }
+}
+
+.breaking-news {
+  font-size: 16px;
+  font-weight: 500;
+  ion-row {
+    padding: 10px;
+    ion-col {
+      p {
+        margin: 0;
+        font-size: 0.7em;
+      }
+    }
+  }
+}
+
+.swiper-slide {
+  display: block;
+}
+
+.swiper-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.referral {
+  ion-col {
+    padding-left: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+
+.teckzite-card {
+  background: #002045;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+
+  ion-card-content {
+    position: relative;
+    img {
+      height: 100%;
+      width: 100%;
+      padding: 8px 16px;
+    }
+  }
+}

@@ -1,0 +1,685 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()"
+        ><ion-icon name="arrow-back-outline"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+    <ion-title>Add News</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-segment [(ngModel)]="selectedTab">
+      <ion-segment-button value="home">
+        <!-- <ion-label><ion-icon name="home-sharp"></ion-icon></ion-label> -->
+        <ion-label>Home</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="addnews">
+        <ion-label>Add News</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="mynews">
+        <ion-label>My News</ion-label>
+      </ion-segment-button>
+      <!-- <ion-segment-button value="localnews">
+        <ion-label> Recent News </ion-label>
+      </ion-segment-button> -->
+      <ion-segment-button value="myads">
+        <ion-label>My Ads</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-item>
+
+  <div class="slide-outlet-fit" [ngSwitch]="selectedTab">
+    <ion-list
+      class="ion-no-padding ion-no-margin"
+      (swipe)="swipeEvent($event)"
+      *ngSwitchCase="'addnews'"
+    >
+      <div style="padding: 20px">
+        
+       <div>
+         <ion-radio-group value="news" (ionChange)="type($event)">
+           <ion-list class="card">
+
+             <ion-item lines="none">
+              <ion-label class="ion-no-margin" style="border-radius: 8px;">
+                <div class="row">
+                  <div class="type-icon" >
+                    <img  src="assets/post/FullImage.svg" alt="FullImage" />
+                    <ion-title>Full Image</ion-title>
+                  </div>
+                  <div>
+                    <ion-radio color="primary" value="ImagePost"></ion-radio>
+                  </div>
+                </div>
+              </ion-label>
+             </ion-item>
+
+            <ion-item lines="none">
+              <ion-label class="ion-no-margin" style="border-radius: 8px;">
+                <div class="row">
+                  <div class="type-icon">
+                    <img src="assets/post/Image.svg" alt="Image" />
+                    <ion-title>Image</ion-title>
+                  </div>
+                  <div>
+                    <ion-radio color="primary" value="news"></ion-radio>
+                  </div>
+                </div>
+              </ion-label>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-label class="ion-no-margin" style="border-radius: 8px;">
+                <div class="row">
+                  <div class="type-icon">
+                    <img src="assets/post/Video.svg" alt="Video" />
+                    <ion-title>Video</ion-title>
+                  </div>
+                  <div>
+                    <ion-radio color="primary" value="VideoPost"> </ion-radio>
+                  </div>
+                </div>
+              </ion-label>
+            </ion-item>
+             
+
+             <ion-item lines="none">
+              <ion-label class="ion-no-margin" style="border-radius: 8px;">
+                <div class="row">
+                  <div class="type-icon">
+                    <img src="assets/post/Link.svg" alt="Link" />
+                    <ion-title>Link</ion-title>
+                  </div>
+                  <div>
+                    <ion-radio color="primary" value="youtube"></ion-radio>
+                  </div>
+                </div>
+              </ion-label>
+             </ion-item>
+           </ion-list>
+         </ion-radio-group>
+       </div>
+      
+
+        <div>
+          <div>
+            <ion-list>
+              <ion-text>
+                <h3 style="margin:0">News Data</h3>
+              </ion-text>
+              <!-- <ion-label position="stacked">News Heading</ion-label> -->
+              <div>
+                <ion-textarea
+                  rows="4"
+                  [(ngModel)]="formdata.title"
+                  maxlength="75"
+                  placeholder="Title of the News"
+                  type="text"
+                  (ngModelChange)="valueChange(formdata.title,'title')"
+                >
+                </ion-textarea>
+                <span>Remaining characters: {{titleRemaining}}</span>
+              </div>
+
+              <br />
+
+              <!-- <ion-label position="stacked">News</ion-label> -->
+              <div *ngIf="formdata.full_size==false">
+                <ion-textarea
+                  rows="6"
+                  [(ngModel)]="formdata.description"
+                  placeholder="Description of the News"
+                  (ngModelChange)="valueChange(formdata.description,'desc')"
+                  maxlength="400"
+                ></ion-textarea>
+                <span>Remaining characters: {{descRemaining}}</span>
+              </div>
+
+              <div *ngIf="formdata.video_type=='youtube'">
+                <!-- <ion-label position="stacked">News</ion-label> -->
+                <ion-textarea
+                  [(ngModel)]="formdata.videos[0]"
+                  rows="6"
+                  placeholder="Enter youtube link (Ex: https://www.youtube.com/watch?v=jOt3j3CYc-c)"
+                ></ion-textarea>
+              </div>
+            </ion-list>
+          </div>
+        </div>
+
+        <input
+          type="file"
+          accept="image/png, image/jpeg"
+          (change)="fileChangeEvent($event)"
+          #inputImage
+          style="display: none"
+        />
+        <input
+          type="file"
+          accept="image/png, image/jpeg"
+          (change)="fileChangeEventforad($event)"
+          #inputImage1
+          style="display: none"
+        />
+
+        <!-- <img [src]="croppedImage" /> -->
+        <div class="flex">
+          <button
+          expand="block"
+          class="btn-inner-1"
+          *ngIf="formdata.post_type=='VideoPost' && formdata.video_type!='youtube'"
+          (click)="fromVideoGallery()"
+        >
+          <ion-icon name="cloud-upload-outline"></ion-icon> &nbsp; Select Video
+        </button>
+        </div>
+
+       <div class="flex">
+          <button
+          *ngIf="formdata.video_type!='youtube' && formdata.post_type!='VideoPost'"
+          expand="block"
+          class="btn-inner-1"
+          style="margin-bottom: 16px"
+          (click)="inputImage.click()"
+        >
+          <ion-icon name="cloud-upload-outline"></ion-icon> &nbsp; Select Photo
+        </button>
+       </div>
+
+        <ion-icon
+          style="
+            margin: 1rem 0px;
+            float: right;
+            height: 22px;
+            width: 22px;
+            color: green;
+            background: #319331;
+            padding: 4px;
+            color: white;
+            border-radius: 50%;
+          "
+          name="checkmark-done-outline"
+          *ngIf="isCropping"
+          (click)="imageCropDone()"
+        ></ion-icon>
+
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="4 / 3"
+          format="png"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+          *ngIf="newstype=='ImagePost'"
+        ></image-cropper>
+
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="10 / 16"
+          format="png"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+          *ngIf="newstype=='FullImagePost'"
+        ></image-cropper>
+
+        <div class="crop">
+          <div class="wrap" *ngIf='newstype=="ImagePost"'>
+            <div *ngFor="let image of imgs; index as i">
+              <ion-icon
+                (click)="removeImage(i)"
+                class="delete"
+                name="trash-outline"
+              ></ion-icon>
+
+              <img
+                [src]="'data:image/jpeg;base64,' + image"
+                style="width: 100px; height: 100px"
+                alt="..."
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="crop">
+          <div class="wrap" *ngIf='newstype=="FullImagePost"'>
+            <div class="img-container" *ngFor="let image of imgs1; index as i">
+              <ion-icon
+                (click)="removeImage(i)"
+                class="delete"
+                name="trash-outline"
+              ></ion-icon>
+              <img
+                [src]="'data:image/jpeg;base64,' + image"
+                style="width: 100px; height: 100px"
+                alt="..."
+              />
+            </div>
+          </div>
+        </div>
+
+        <ion-card>
+          <ion-card-content class="ion-no-padding">
+            <ion-item lines="none">
+              <ion-label>Category</ion-label>
+              <ion-select
+                [(ngModel)]="formdata.category"
+                interface="action-sheet "
+              >
+                <ion-select-option
+                  *ngFor="let cat of categoryData"
+                  [value]="cat._id "
+                >
+                  {{cat.name}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+
+        <div>
+          <ion-card-header style="margin-top: 15px;">  *Select News Display Level  </ion-card-header>
+          <div>
+            <ion-radio-group value="mandal" [(ngModel)]="formdata.level">
+              <ion-item lines="none">
+                <ion-radio slot="start" value="mandal"></ion-radio>
+                <ion-label>Mandal &nbsp;</ion-label>
+                <ion-select
+                  [(ngModel)]="selected_mandals"
+                  interface="action-sheet"
+                  multiple
+                >
+                  <ion-select-option
+                    *ngFor="let mandal of mandals"
+                    [value]="mandal._id "
+                  >
+                    {{mandal.name}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-radio slot="start" value="district"></ion-radio>
+                <ion-label
+                  >District &nbsp; ({{center.location.district}})</ion-label
+                >
+              </ion-item>
+              <ion-item lines="none">
+                <ion-radio slot="start" value="state"></ion-radio>
+                <ion-label>State &nbsp; ({{center.location.state}})</ion-label>
+              </ion-item>
+            </ion-radio-group>
+          </div>
+        </div>
+
+        <ion-card *ngIf="isAd">
+          <ion-card-content>
+            <ion-list>
+              <ion-item lines="none">
+                <ion-label
+                  class="ion-text-wrap ion-no-padding ion-no-margin"
+                  style="color: rgb(104, 104, 235)"
+                  >Is this Ad Post</ion-label
+                >
+                <ion-checkbox
+                  (ionChange)="post_ad_checked = !post_ad_checked"
+                  slot="start"
+                  [checked]="isAd"
+                >
+                </ion-checkbox>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+
+        <!-- <div *ngIf="newstype=='ImagePost'" (click)="inputImage1.click()">
+          <ion-card-header style="margin-top: 15px;"> Optional </ion-card-header>
+          <div class="flex">
+            <button expand="block" class="btn-inner-1">
+              <ion-icon name="cloud-upload-outline"></ion-icon> &nbsp; Select
+              Photo for Baner Ad
+            </button>
+          </div>
+        </div>
+
+        <ion-icon
+          style="
+            margin: 1rem 0px;
+            float: right;
+            height: 22px;
+            width: 22px;
+            color: green;
+            background: #319331;
+            padding: 4px;
+            color: white;
+            border-radius: 50%;
+          "
+          name="checkmark-done-outline"
+          *ngIf="isCroppingforad"
+          (click)="imageCropDoneforad()"
+        ></ion-icon>
+
+        <image-cropper
+          [imageChangedEvent]="imageChangedEventforad"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="4 / 1"
+          format="png"
+          (imageCropped)="imageCroppedforad($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+          *ngIf="newstype=='ImagePost'"
+        ></image-cropper>
+
+        <div class="crop1" *ngIf='newstype=="ImagePost"'>
+          <div class="wrap">
+            <div *ngFor="let image of imgsforad; index as i">
+              <ion-icon
+                (click)="removeImageforad(i)"
+                class="delete"
+                name="trash-outline"
+              ></ion-icon>
+
+              <img
+                [src]="'data:image/jpeg;base64,' + image"
+                style="width: 100%; height: 100px; padding: 10px"
+                alt="..."
+              />
+            </div>
+          </div>
+        </div> -->
+
+        <div>
+          <div>
+            <ion-list>
+              <ion-item lines="none">
+                <ion-label
+                  class="ion-no-padding ion-no-margin"
+                  (click)="terms_modal()"
+                  >Terms & Conditions</ion-label
+                >
+                <ion-checkbox (ionChange)="terms()" slot="start" checked>
+                </ion-checkbox>
+              </ion-item>
+            </ion-list>
+
+            <div class="flex">
+              <button class="btn-inner-1" expand="block" (click)="submit()">
+                Post
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-list>
+
+    <ion-list
+      class="ion-no-padding ion-no-margin"
+      (swipe)="swipeEvent($event)"
+      *ngSwitchCase="'mynews'"
+    >
+      <div class="ion-no-margin" *ngIf="!myPostData.length">
+        <app-no-data-found [name]="{'name':'Start posting, yours post are empty!'}"></app-no-data-found>
+      </div>
+
+      <div *ngFor="let news of myPostData">
+        <app-image-post
+          [newsData]="news.news"
+          [type]="{'type':'small'}"
+          [news_id]="news._id"
+          [time]="news.createdAt"
+          [edit]="{'check':'true'}"
+          [postData]="news"
+          *ngIf="news.type=='ImagePost'"
+        ></app-image-post>
+        <app-magazine-post
+          [newsData]="news.news"
+          [time]="news.createdAt"
+          [type]="{'type':'small'}"
+          [news_id]="news._id"
+          [postData]="news"
+          [edit]="{'check':'true'}"
+          *ngIf="news.type=='Magazine'"
+        ></app-magazine-post>
+        <app-video-post
+          [newsData]="news.news"
+          [time]="news.createdAt"
+          [type]="{'type':'small'}"
+          [news_id]="news._id"
+          [postData]="news"
+          [edit]="{'check':'true'}"
+          *ngIf="news.type=='VideoPost'"
+        ></app-video-post>
+        <app-url-post
+          [newsData]="news.news"
+          [type]="{'type':'small'}"
+          [news_id]="news._id"
+          [edit]="{'check':'true'}"
+          [time]="news.createdAt"
+          [postData]="news"
+          *ngIf="news.type=='URLPost'"
+        ></app-url-post>
+      </div>
+    </ion-list>
+
+    <!-- ===========HOME======== -->
+    <ion-list *ngSwitchCase="'home'">
+      <div></div>
+
+      <div>
+        <div class="user-info">
+          <div class="user-icon">
+            <img
+              (click)="updating()"
+              src="https://flyclipart.com/thumb2/account-avatar-client-person-profile-user-icon-196361.png"
+              alt=""
+            />
+            <!-- <div class="badge">
+              <ion-icon name="camera-outline" (click)="f.click()"></ion-icon>
+              <input type="file" class="ion-hide" #f class="myIcon" />
+            </div> -->
+          </div>
+          <br />
+          <div class="user-edit">
+            <h3 class="user-name user-data">
+              {{user_details.details.name}}
+              <!-- hello user -->
+            </h3>
+            <ion-icon
+              (click)="edit_modal_popup()"
+              class="pencil"
+              name="pencil"
+            ></ion-icon>
+          </div>
+          <h3 class="user-phone user-data">{{user_details.mobile}}</h3>
+        </div>
+
+        <ion-card class="card1">
+          <div>
+            <ion-text color="primary">Total</ion-text>
+            <h5 class="center">
+              <b
+                >{{mystatsdata.verified+mystatsdata.rejected+mystatsdata.posted}}</b
+              >
+            </h5>
+          </div>
+          <div>
+            <ion-text color="warning">Pending</ion-text>
+            <h5 class="center">
+              <b>{{mystatsdata.posted}}</b>
+            </h5>
+          </div>
+
+          <div>
+            <ion-text color="success">Verified</ion-text>
+            <h5 class="center">
+              <b>{{mystatsdata.verified}}</b>
+            </h5>
+          </div>
+
+          <div>
+            <ion-text color="danger">Rejected</ion-text>
+            <h5 class="center">
+              <b>{{mystatsdata.rejected}}</b>
+            </h5>
+          </div>
+        </ion-card>
+
+        <div class="container">
+          <ul class="progressbar">
+            <li class="active">News User</li>
+            <li [ngClass]="{active: mystatsdata.verified >= 5}">Reporter</li>
+            <li [ngClass]="{active: mystatsdata.verified >= 500}">
+              Senior Reporter
+            </li>
+          </ul>
+        </div>
+
+        <ion-card class="role" style="margin: 25px; text-align: center">
+          <ion-card-content
+            *ngIf="mystatsdata.verified >= 0 && mystatsdata.verified < 5"
+          >
+            <span>Upload 5 posts to become a Reporter</span>
+          </ion-card-content>
+          <ion-card-content
+            *ngIf="mystatsdata.verified >= 5 && mystatsdata.verified < 500"
+          >
+            <span>Your are a Reporter now!</span>
+            <p>You need to cross 500 posts to be as Senior Reporter!</p>
+          </ion-card-content>
+          <ion-card-content *ngIf="mystatsdata.verified >= 500">
+            <span> Your are a Senior Reporter now!</span>
+            <p>Go a head with MeeBuddy News!</p>
+          </ion-card-content>
+        </ion-card>
+
+        <div style="display: flex; justify-content: space-around; margin: 7px">
+          <button
+            (click)="selectedTab = 'addnews'"
+            style="width: 40%"
+            class="local-btn-bg"
+          >
+            Add News
+          </button>
+          <button
+            (click)="selectedTab = 'mynews'"
+            style="width: 40%"
+            class="local-btn-bg"
+          >
+            My News
+          </button>
+        </div>
+      </div>
+
+      <!--   <div *ngFor="let mandal of allmandalsdata;let i = index" >
+    <app-mandaledit [mandals]='mandal' [districts]='districtData' [sno]='i'></app-mandaledit>
+   
+</div> -->
+    </ion-list>
+
+    <!-- ==========MY Ads========== -->
+    <ion-list
+      class="ion-no-padding ion-no-margin"
+      (swipe)="swipeEvent($event)"
+      *ngSwitchCase="'myads'"
+    >
+      <div class="ion-no-margin" *ngIf="!adsData.length">
+        <app-no-data-found [name]="{'name':'No ads are found'}"></app-no-data-found>
+      </div>
+
+      <div *ngFor="let news of adsData">
+        <app-image-post
+          [newsData]="news.post.news"
+          [type]="{'type':'small'}"
+          [news_id]="news.post._id"
+          [edit]="{'check':'true'}"
+          [time]="news.post.createdAt"
+          [postData]="news"
+          *ngIf="news.post.type=='ImagePost'"
+        ></app-image-post>
+        <app-magazine-post
+          [newsData]="news.post.news"
+          [time]="news.post.createdAt"
+          [type]="{'type':'small'}"
+          [news_id]="news.post._id"
+          [edit]="{'check':'true'}"
+          [time]="news.post.createdAt"
+          [postData]="news"
+          *ngIf="news.post.type=='Magazine'"
+        ></app-magazine-post>
+        <app-video-post
+          [newsData]="news.post.news"
+          [type]="{'type':'small'}"
+          [news_id]="news.post._id"
+          [edit]="{'check':'true'}"
+          *ngIf="news.post.type=='VideoPost'"
+          [postData]="news"
+          [time]="news.post.createdAt"
+        ></app-video-post>
+        <app-url-post
+          [newsData]="news.post.news"
+          [type]="{'type':'small'}"
+          [news_id]="news.post._id"
+          [edit]="{'check':'true'}"
+          [postData]="news"
+          *ngIf="news.post.type=='URLPost'"
+          [time]="news.post.createdAt"
+        ></app-url-post>
+      </div>
+    </ion-list>
+
+    <!-- <ion-list
+      class="ion-no-padding ion-no-margin"
+      (swipe)="swipeEvent($event)"
+      *ngSwitchCase="'localnews'"
+    >
+      <ion-list>   
+          <ion-card>
+            <ion-card-content style="display: flex; justify-content: center; align-items: center;flex-direction: column;">
+              <ion-icon style="color: #3880ff;height:50px;width:50px" name="cloud-upload-outline"></ion-icon>
+              <ion-text style="color: #8ab5ff; text-align:center">
+                Recently uploaded local post(District ,Mandal Level)
+              </ion-text>
+            </ion-card-content>
+          </ion-card>
+       
+
+        <div style="margin: 10px 0" *ngFor="let news of local_news">
+          <app-image-post
+            [newsData]="news.news"
+            [type]="{'type':'small'}"
+            [news_id]="news._id"
+            *ngIf="news.type=='ImagePost'"
+           [time] = "news.createdAt"           
+          ></app-image-post>
+          <app-magazine-post
+            [newsData]="news.news"
+            [type]="{'type':'small'}"
+            [news_id]="news._id"
+           [time] = "news.createdAt"           
+            *ngIf="news.type=='Magazine'"
+          ></app-magazine-post>
+          <app-video-post
+            [newsData]="news.news"
+            [type]="{'type':'small'}"
+            [news_id]="news._id"
+            *ngIf="news.type=='VideoPost'"
+          [time] = "news.createdAt"
+          ></app-video-post>
+          <app-url-post
+            [newsData]="news.news"
+            [type]="{'type':'small'}"
+            [news_id]="news._id"
+            *ngIf="news.type=='URLPost'"
+          [time] = "news.createdAt"
+          ></app-url-post>
+        </div>
+      </ion-list>
+    </ion-list> -->
+  </div>
+</ion-content>

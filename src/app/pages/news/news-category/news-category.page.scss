@@ -1,0 +1,44 @@
+.slide-outlet-fit{
+
+    height: 100vh;
+    overflow-y: scroll;
+
+    ion-list{
+        height: 100%;
+
+        ion-slides{
+            height: 100%;
+            width: 100%;
+        }
+
+    }
+
+}
+
+
+.categories-list{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 5px;
+    ion-chip{
+        outline: none;
+        background: #f0f0f0; 
+        color: #000000;
+        display: flex;
+        flex-flow: column;
+        height: 100%;
+        width: 100%;
+        border-radius: 8px;
+        ion-label{
+            text-align: center;
+            font-size: 10px;
+        }
+    }
+    img{
+      height: 54px;
+      padding-right: 6px;
+    }
+    ion-label{
+      font-size: 12px;
+    }
+  }

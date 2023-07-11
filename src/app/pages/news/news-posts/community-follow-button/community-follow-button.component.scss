@@ -1,0 +1,36 @@
+.btn-bg-requested{
+    color: color;
+    border-radius: 4px;
+    border: 1px solid orange;
+    background: white;
+    color: orange;
+    padding: 4px 8px;
+}
+.btn-bg-requested:hover{
+    background: orange;
+    color: white;
+}
+
+.btn-bg-following{
+    background: white;
+    color: #b73f71;
+    border-radius: 4px;
+    border: 1px solid #b73f71;
+    padding: 4px 8px;
+}
+.btn-bg-following:hover{
+    color: white;
+    background: #b73f71;
+}
+
+.btn-bg-follow{
+    background: #b73f71;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+.btn-bg-follow:hover{
+    background: white;
+    color: #b73f71;
+    border: 1px solid #b73f71;
+}

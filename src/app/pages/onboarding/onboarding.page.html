@@ -1,0 +1,67 @@
+<ion-header> </ion-header>
+
+<ion-content class="ion-padding">
+  <ion-slides pager="true">
+
+    <ion-slide class="ion-padding">
+      <img src="../../assets/icon/logo_b.png" />
+      <div class="slider-text">
+        <h2>Get Updates Gobal to Local Anytime</h2>
+        <p>Made In India</p>
+      </div>
+      <button (click)="goToLogin()" class="btn-inner-1">
+        <span>GET STARTED</span> &nbsp;&nbsp;
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+      <img
+        src="../../assets/stories/onboard.svg"
+        style="
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 45vh;
+          left: 0;
+          padding: 0;
+        "
+      />
+      <div class="navigator">
+        <ion-button color="primary" fill="clear" (click)="goToLogin()"
+          >SKIP</ion-button
+        >
+        <ion-button color="primary" fill="clear" (click)="next()"
+          >NEXT</ion-button
+        >
+      </div>
+    </ion-slide>
+
+
+
+
+    <ion-slide class="ion-padding">
+      <img src="../../assets/icon/logo_b.png" />
+
+      <div class="slider-text">
+        <h2>Stay Connected with us,Stay Updated</h2>
+
+        <p>Easy to Use</p>
+      </div>
+
+      <button (click)="goToLogin()" class="btn-inner-1">
+        <span>Let's Go</span> &nbsp;&nbsp;
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+      <img
+        src="../../assets/stories/applyStory.png"
+        style="
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 45vh;
+          left: 0;
+          padding: 0;
+        "
+      />
+
+    </ion-slide>
+  </ion-slides>
+</ion-content>

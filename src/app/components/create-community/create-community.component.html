@@ -1,0 +1,121 @@
+
+
+
+
+<ion-content class="ion-padding">
+
+
+    <div style="display: flex;
+                justify-content: center;
+                font-size: 1.4em;
+                padding-bottom: 5px;"
+    >
+        <ion-text>
+            Create Community
+        </ion-text>
+        <ion-buttons
+        style="position: absolute;right: 10px;top: 10px;"
+        (click)="dismiss()">
+          <ion-button>
+              <ion-icon name="close"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+     </div>
+
+  <ion-list>
+    
+      <ion-item style="margin-bottom: 10px;">
+          <!-- <ion-label position="stacked">News Heading</ion-label> -->
+          <ion-input [(ngModel)]="formdata.name" maxlength="75" placeholder="Name" type="text"></ion-input>
+      </ion-item>
+
+
+          <!-- <ion-label position="stacked">News</ion-label> -->
+        <ion-textarea 
+        [(ngModel)]="formdata.description" 
+        rows="6"
+        placeholder="Description (Optional)" 
+        maxlength="400"
+        style="margin-bottom: 10px;"></ion-textarea>
+
+        
+        <ion-select style="margin-bottom: 10px;" placeholder="Please Type" [(ngModel)]="formdata.type">
+            <ion-select-option value='private' selected>private</ion-select-option>
+            <ion-select-option value='public'>public</ion-select-option>
+        </ion-select>
+
+  </ion-list>
+
+  <!-- <ion-button expand="block" (click)="fromGallery()">
+      <ion-icon name="cloud-upload-outline"></ion-icon>
+  </ion-button>
+  <ion-item>
+      <ion-thumbnail >
+          <img [src]="'data:image/jpeg;base64,' + formdata.icon" />
+      </ion-thumbnail>
+  </ion-item> -->
+
+    <input type="file" accept="image/png, image/jpeg" (change)="fileChangeEvent($event)" #inputImage style="display: none"/>
+
+        <ion-button
+        expand="block" 
+        (click)="inputImage.click()">
+        <ion-icon name="cloud-upload-outline"></ion-icon> &nbsp; Select Photo</ion-button>
+    
+    <ion-icon 
+            style="margin: 1rem 0px;
+            float: right;
+            height: 18px;
+            width: 18px;
+            color: green;
+            background: #319331;
+            padding: 4px;
+            color: white;
+            border-radius: 50%;" 
+            name="checkmark-done-outline" 
+            *ngIf="isCropping"
+            (click)="imageCropDone()"
+    ></ion-icon>
+
+
+    <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="3 / 3"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded()"
+    (cropperReady)="cropperReady()"
+    (loadImageFailed)="loadImageFailed()"
+
+
+    ></image-cropper>
+
+    <div class="crop" *ngIf="displayIcon">
+        <div class="wrap">
+
+            <div>
+                <ion-icon (click)="removeImage('i')" class="delete" name="trash-outline"></ion-icon>
+                <img [src]="'data:image/jpeg;base64,' + formdata.icon"  style="width:100px;height:100px;"  alt="..." />
+            </div>
+        
+        </div>
+    </div>
+
+
+
+</ion-content>
+
+
+
+<ion-footer>
+  <ion-list>
+      <ion-item lines="none">
+          <ion-buttons style="background: #3880ff;color: white;" slot=end (click)="submit()">
+              <ion-button>Create
+              </ion-button>
+          </ion-buttons>
+      </ion-item>
+  </ion-list>
+</ion-footer>
+

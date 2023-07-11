@@ -1,0 +1,115 @@
+<div *ngIf="type.type == 'large'">
+
+    <ion-header>
+      <ion-toolbar>
+         <ion-buttons slot='start' class="ion-no-margin" (click)='back()'>
+                   <ion-button><ion-icon name="arrow-back-outline"></ion-icon></ion-button>          
+            </ion-buttons>
+        <ion-title class="ion-text-wrap">{{newsData.title}}</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <div class="polling" *ngIf="!newsData.submissions.length; else result">
+      <div class="poll-question ion-text-wrap">
+        <p>{{newsData.question}}</p>
+      </div>
+      <ion-list>
+        <ion-radio-group class="ion-margin-top">
+          <div *ngFor='let option of newsData.options; index as i'>
+            <ion-item lines="none" (click)="submit(newsData._id,option._id)"> 
+              <ion-radio slot="start" name="select" ></ion-radio>
+              <ion-label>{{option.data}} {{ischecked1(option._id)}}</ion-label>
+            </ion-item>
+            <div class="poll" [ngStyle]="{'display' : isOptionChecked ? 'block' : 'none'}">
+              <div class="poll-width" [ngStyle]="{'width': optionWidth(i) + '%'}" >{{optionWidth(i)}}%</div>
+            </div> 
+          </div>
+        </ion-radio-group>
+      </ion-list>
+    </div>
+
+    <ng-template #result>
+      <div class="polling">
+        <div class="poll-question ion-text-wrap">
+          <p>{{newsData.question}}</p>
+        </div>
+        <ion-list>
+          <ion-radio-group class="ion-margin-top">
+            <div *ngFor='let option of newsData.options; index as i'>
+              <ion-item [ngClass]="{'isOptionMarked': ischecked1(option._id)}" lines="none"> 
+                <ion-radio disabled="true" slot="start" name="select" ></ion-radio>
+                <ion-label>{{option.data}} </ion-label>
+              </ion-item>
+              <div class="poll" >
+                <div class="poll-width" [ngStyle]="{'width': optionWidth(i) + '%'}" >{{optionWidth(i)}}%</div>
+              </div> 
+            </div>
+          </ion-radio-group>
+        </ion-list>
+        <span style="background: #a61e97;
+                    padding: 6px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin:5px 20px;
+                    border-radius: 5px;
+                    color: white;"
+        >
+          Already Submitted
+        </span>
+      </div>
+    </ng-template>
+
+</div>
+
+<div *ngIf="type.type == 'small'">
+
+        <ion-item detail style="cursor: pointer;" detail (click)="redirectToViewNews()">
+          <ion-thumbnail class="ion-margin-end">
+            <ion-img *ngIf="!newsData.image" src="https://meebuddy.com/app_files/meebuddy.png"></ion-img>
+            <ion-img *ngIf="newsData.image" src="{{newsData.image}}"></ion-img>
+          </ion-thumbnail>
+          <ion-label class="ion-no-margin">
+            <p style="margin: 0;padding: 0;color: rgb(3, 59, 82);">Poll</p>
+            <ion-text class="wrap">
+              {{newsData.title}}
+            </ion-text>
+            <p style="margin: 0;padding: 0;font-size: .75em;">{{common.stringAsDate(time)}}</p>
+        
+          </ion-label>
+
+          <button 
+            style="color: #b00376;
+            background: white;
+            border: 1px solid #b00376;
+            border-radius: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2px 4px;
+            font-size: .8em;"
+            *ngIf="edit.check == 'true'">
+                Edit
+            </button>
+
+            
+            <button 
+            style="color: #b00376;
+            background: white;
+            border: 1px solid #b00376;
+            border-radius: 2px;
+            padding: 2px 4px;
+            font-size: .8em;
+            position: absolute;
+            right: 36px;
+            bottom: 2px;"
+            *ngIf="edit.check == 'true'">
+               status 
+            </button>
+
+        </ion-item>
+</div>
+
+
+
+

@@ -1,0 +1,60 @@
+<ion-content [scrollEvents]="true">
+  <ion-item style="padding: 0; position: sticky;top: 0;left: 0;z-index: 100;" lines="full">
+    <h2 style="margin: 0 0 0 0px; font-size: 18px">Comments</h2>
+    <ion-buttons style="position: absolute; right: 8px">
+      <ion-button (click)="dismissModal()"
+        ><ion-icon style="font-size: 24px" name="close"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+  </ion-item>
+
+  <!-- <ion-item lines="full">
+    <h1 style="margin-top: 12px;margin-left: 25px;margin-bottom: 8px;">Add a comment</h1> 
+    <ion-buttons style="position: absolute;top: 12px;right: 10px;">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-item> -->
+
+  <ion-list class="comments-content">
+    <div style="margin-bottom: 8px;" *ngFor="let comment of comments">
+      <ion-item lines="none">
+        <ion-avatar class="ion-margin-end" slot="start">
+          <ion-img src="assets/menu/MaleAvatar.svg"></ion-img>
+        </ion-avatar>
+        <ion-label class="ion-no-margin">
+          <p>
+            {{ comment.commented_by.name }}
+          </p>
+          <ion-text class="ion-text-wrap" style="font-size: 0.9em">{{
+            comment.text
+          }}</ion-text>
+        </ion-label>
+      </ion-item>
+      <div class="comment-details">
+        <div><p></p></div>
+        <div>
+          <ion-icon (click)='showDetails(comment._id)' name="alert-circle-outline"></ion-icon>
+          <ion-icon name="heart-outline"></ion-icon>
+        </div>
+      </div>
+    </div>
+  </ion-list>
+
+  <div class="ion-no-margin" *ngIf="!comments.length">
+    <app-no-data-found [name]="{ name: 'Please post your comments' }"></app-no-data-found>
+  </div>
+
+  <br /><br /><br /><br />
+  <br /><br /><br /><br />
+</ion-content>
+
+<ion-footer style="position: fixed; bottom: 0%;z-index: 10000;">
+  <ion-item lines="none" style="border: 1px solid #dbd9d9;margin: 10px;border-radius: 8px;" class="ion-align-items-center">
+    <ion-input style="margin-right: 20px;" placeholder="Add a comment...." type="text" [(ngModel)]="formData1.text"></ion-input>
+    <div style="    position: absolute;right: 0;">
+      <button class="btn-bg" style="background: transparent;">
+        <img  (click)="sendcomment(newsData._id)" style="height: 30px;width: 30px;" src="assets/footer/ChatSend.svg" alt="" />
+      </button>
+    </div>
+  </ion-item>
+</ion-footer>

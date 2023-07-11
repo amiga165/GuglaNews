@@ -1,0 +1,75 @@
+.polling{
+    
+    margin: 10px;
+    overflow-y: scroll;
+    
+    .poll-question{
+        padding: 20px 10px;
+        display: flex;
+        color: #252424;
+        border: 1px solid lightgray;
+        font-size: 1em;
+        max-height: 45vh;
+        overflow-y: scroll;
+    }
+    ion-item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid gray;
+        border-radius: 20px;
+        height: 40px;
+        margin: 10px 0;
+    }
+}
+
+.poll{
+    height: 30px;
+    width: 100%;
+    border:1px solid rgb(231, 230, 230);
+    background: rgb(228, 228, 228);
+    .poll-width{
+        height: 100%;
+        background: #757175;
+        display: flex;
+        align-items: center;
+        padding-left: 5px;
+        color: black;
+        animation: poll;
+        animation-duration: .3s;
+    }
+}
+
+.isOptionMarked{
+    --background:#d9d9d9;
+}
+
+.wrap{
+    text-overflow:ellipsis;
+    overflow:hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    font-size: .95em;
+}
+
+@keyframes poll {
+
+    0%{
+        width: 0%;
+    }
+    25%{
+        width: 25%;
+    }
+    50%{
+        width: 50%;
+    }
+    75%{
+        width: 75%;
+    }
+    100%{
+        width: 100%;
+    }
+    
+}

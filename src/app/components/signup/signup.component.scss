@@ -1,0 +1,61 @@
+content {
+  --background: url(https://www.colourbox.com/preview/22243987-e-commerce-colorful-round-illustration.jpg)
+    0 0/100% 100% no-repeat;
+}
+
+ion-list {
+  --background: transparent;
+}
+
+ion-button {
+  --border-radius: 50px; 
+}
+
+.sign_in {
+  ion-segment {
+    border-top: 2px solid #ddd;
+    margin-top: 25px;
+    border-radius: 40px;
+    padding-top: 15px;
+  }
+}
+
+.login_form {
+  padding: 10px 20px;
+  ion-row {
+    ion-col {
+      ion-item {
+        border: 1px solid lightgray;
+        border-radius: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45px;
+        margin: 3px;
+        ion-label {
+          position: absolute;
+          ion-icon {
+            height: 25px;
+            width: 25px;
+            border-right: 2px solid #9e9cb3;
+            padding-right: 10px;
+            color: #094173;
+            margin-right: 14px;
+          }
+        }
+        ion-input {
+          margin-left: 40px;
+          ::placeholder {
+            font-size: 10px;
+            color: pink;
+          }
+        }
+      }
+    }
+  }
+}
+
+.re-create{
+  text-align: center;color: #0086f8;font-weight: bold;
+}
+

@@ -1,0 +1,47 @@
+.half-modal .modal-wrapper
+{
+  height: 75%;
+  top: 25%;
+}
+
+.comments-content{
+  ion-avatar{
+    margin-right: 2px;
+  }
+  ion-label{
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 12px;
+    margin-top: 8px;
+    p{
+      margin: 0;
+      padding: 0;
+      text-transform: capitalize;
+      font-weight: 500;
+      color: #40b9ee;
+    }
+  }
+}
+
+.comment-details{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  right: 0;
+  width: 75%;
+  margin-left: 60px;
+
+  p{
+    margin: 0;
+    font-size: 10px;
+    padding-left: 10px;
+  }
+  div:nth-child(2){
+    width: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

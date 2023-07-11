@@ -1,0 +1,114 @@
+<div *ngIf="type.type == 'large' && !checkIsSubmitted(newsData)">
+  <ion-header>
+    <ion-toolbar>
+       <ion-buttons slot='start' class="ion-no-margin">
+                 <ion-button (click)="back()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>          
+          </ion-buttons>
+  
+      <ion-title style="text-align: left;">FEEDBACK</ion-title>
+    </ion-toolbar>
+  </ion-header>
+      <div class="survey">
+        <ion-list class="ion-padding">
+  
+            <ion-list *ngFor='let question of newsData.questions'>
+              
+              <!-- INPUT FIELD -->
+              <div *ngIf="question.question_type=='input'" class="input-field">
+                <p>{{question.question}}</p>
+                <ion-input placeholder="Enter Input" class="ion-margin-bottom" [(ngModel)]="question.answer"></ion-input>
+              </div>
+  
+              <!-- TEXTAREA FIELD -->
+              <div *ngIf="question.question_type=='textarea'" class="textarea-field">
+                <p>{{question.question}}</p>
+                <ion-textarea placeholder="Enter more information here..." [(ngModel)]="question.answer"></ion-textarea>
+              </div>
+  
+              <!-- SELECT DROPDOWN -->
+              <div *ngIf="question.question_type=='dropdown'" class="select-field">
+                <p>{{question.question}}</p>
+                <ion-select placeholder="Please select" [(ngModel)]="question.answer">
+                  <ion-select-option value="f" *ngFor="let option of question.options">{{option}}</ion-select-option>
+                </ion-select>
+              </div>
+              
+              <!-- MULTISELECT DROPDOWN -->
+              <div *ngIf="question.question_type=='multiselect'" class="select-field">
+                <p>{{question.question}}</p>
+                <ion-select placeholder="Please select" multiple [(ngModel)]="question.answer">
+                  <ion-select-option value="f" *ngFor="let option of question.options">{{option}}</ion-select-option>
+                </ion-select>
+              </div>
+      
+              <!-- RADIO FIELD -->
+              <div class="radio-field" *ngIf="question.question_type=='radio'">
+                <p class="ion-margin-bottom">{{question.question}}</p>
+  
+                <ion-radio-group class="ion-margin-bottom" [(ngModel)]="question.answer">
+                  <ion-item *ngFor="let option of question.options" lines="none">
+                    <ion-label>{{option}}</ion-label>
+                    <ion-radio slot="start" name="val" [value]="option"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+  
+              </div>
+      
+            </ion-list>
+      
+            
+            <ion-button class="btn-bg" expand="block" (click)="submitSurvey()">Submit</ion-button>
+            
+      
+        </ion-list>
+      </div>
+</div>
+
+<div *ngIf="type.type == 'large' && checkIsSubmitted(newsData)">
+  <ion-header>
+    <ion-toolbar>
+       <ion-buttons slot='start' class="ion-no-margin" >
+                 <ion-button (click)="back()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>          
+          </ion-buttons>
+  
+      <ion-title style="text-align: left;">FEEDBACK</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div>
+    <div style="height: 30vh;
+    width: 100%; background: #0086f8;"></div>
+    <ion-card style="margin-top:-90px; 
+                    height:200px;  
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;">
+      <ion-card-content>
+        <ion-text style="font-size: 1.5em;color: black;" class="ion-text-wrap">
+          You've already Submitted
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</div>
+
+
+<div *ngIf="type.type == 'small'">
+
+  <ion-item detail (click)="redirectToViewNews()">
+    <ion-thumbnail class="ion-margin-end">
+      <ion-img *ngIf="!newsData.image" src="https://meebuddy.com/app_files/meebuddy.png"></ion-img>
+      <ion-img *ngIf="newsData.image" src="{{newsData.image}}"></ion-img>
+    </ion-thumbnail>
+    <ion-label class="ion-no-margin">
+      <p style="margin: 0;padding: 0;color: rgb(3, 59, 82);">{{newsData.title}}</p>
+      <ion-text class="wrap">
+        {{newsData.questions[0].question}}
+      </ion-text>
+      <p style="margin: 0;padding: 0;font-size: .75em;">{{common.stringAsDate(time)}}</p>
+
+    </ion-label>
+  </ion-item>
+
+</div>

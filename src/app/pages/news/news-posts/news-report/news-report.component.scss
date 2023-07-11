@@ -1,0 +1,41 @@
+
+h2{
+    margin-left: 8px;
+}
+.report-mistake{
+   
+    h3{
+        margin: 0;
+        color: grey;
+        font-size: 12px;
+
+    }
+
+    ion-radio-group{
+        ion-item{
+            font-size: 14px;
+            margin-left: -16px;
+        }
+        ion-radio{
+            height: 14px;
+            width: 14px;
+        }
+    }
+    ion-textarea{
+        border: 1px solid var(--ion-color-medium-tint);
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        font-size: 14px;
+        padding: 10px 5px;
+        .textarea-wrapper{
+            min-width: unset;
+            max-width: unset;
+            min-height: unset;
+            max-height: unset;
+            height: 100%;
+          }
+    }
+    ion-input{
+        font-size: 14px;
+    }
+    
+}

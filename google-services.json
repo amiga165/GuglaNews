@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "386451875047",
+    "project_id": "gugla-push-notifications",
+    "storage_bucket": "gugla-push-notifications.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386451875047:android:fa6f0ecc0535a3f90c6e42",
+        "android_client_info": {
+          "package_name": "com.guglanews.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386451875047-6e1fha322nrnfh69jqqgsmdao3i6mv4g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.guglanews.android",
+            "certificate_hash": "f041beeb4e2c46b034ea249483c56515e5c73b68"
+          }
+        },
+        {
+          "client_id": "386451875047-iddufi3ioge54d20ea439a4hn75jr6e2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoz0tEQEsi0xQnQ8_ccqn57SGZfakxCvM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386451875047-iddufi3ioge54d20ea439a4hn75jr6e2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

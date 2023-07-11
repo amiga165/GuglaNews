@@ -1,0 +1,41 @@
+<!-- <div >
+  <ion-list>
+
+      <ion-buttons>
+          <ion-button *ngIf="com_mem" (click)="unfollow()" slot="end">
+              Following
+          </ion-button>
+          <ion-button *ngIf="!com_mem && !com_mem_pen" (click)="follow()" slot="end">
+              follow
+          </ion-button>
+          <ion-button *ngIf="com_mem_pen" slot="end" (click)="unfollow()">
+              Pending Request
+          </ion-button>
+      </ion-buttons>
+  </ion-list>
+
+
+</div> -->
+
+<div >
+    <ion-list>
+        <div>
+            <button class="btn-bg-following" *ngIf="com_owner" slot="end">
+                Following
+            </button>
+
+            <button class="btn-bg-following"  *ngIf="com_mem && !com_owner" (click)="unfollow()" slot="end">
+                Following
+            </button>
+            <button class="btn-bg-follow"
+                        *ngIf="!com_mem && !com_mem_pen && !com_owner" (click)="follow()" slot="end">
+                Follow
+            </button>
+            <button class="btn-bg-requested"  *ngIf="com_mem_pen" slot="end" (click)="unfollow()">
+              Requested
+            </button>
+        </div>
+    </ion-list>
+  
+  
+  </div>

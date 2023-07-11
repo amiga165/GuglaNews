@@ -1,0 +1,50 @@
+<ion-content>
+  <ion-list>
+    <ion-item  lines="none">
+      <ion-buttons style="position: absolute; right: 8px">
+        <ion-button (click)="dismissModal('close')"
+          ><ion-icon style="font-size: 24px;" name="close"></ion-icon
+        ></ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+  
+  <ion-list>
+    <ion-item (click)="dismissModal('report')" lines="none">
+      <ion-avatar slot="start">
+        <img src="assets/footer/Flag.svg" alt="Report">
+      </ion-avatar>
+      <ion-label>
+        <h2>Report Story</h2>
+        <p>Help us improve better</p>
+      </ion-label>
+    </ion-item>
+    <ion-item (click)="dismissModal('download')" lines="none">
+      <ion-avatar slot="start">
+        <img src="assets/footer/Download.svg" alt="Download">
+      </ion-avatar>
+      <ion-label>
+        <h2>Download</h2>
+        <p>Save post to your local device</p>
+      </ion-label>
+    </ion-item>
+    <ion-item (click)="dismissModal('share')" lines="none">
+      <ion-avatar slot="start">
+        <img src="assets/footer/Share.svg" alt="Download">
+      </ion-avatar>
+      <ion-label>
+        <h2>Share</h2>
+        <p>let your friends to know about this post</p>
+      </ion-label>
+    </ion-item>
+    <ion-item (click)="dismissModal('block')" lines="none">
+      <ion-avatar slot="start">
+        <img src="assets/footer/Eye-off.svg" alt="Download">
+      </ion-avatar>
+      <ion-label>
+        <h2>Block</h2>
+        <p>Post is hidden if you are not interested</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>Category Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card style="margin: 12px; padding: 8px">
+    <ion-list style="padding-right: 8px; padding-bottom: 24px">
+      <div class="cat-header">
+        <div style="width: 50%">
+          <p>Turn on/off</p>
+        </div>
+        <div style="width: 35%">
+          <p>Notifications</p>
+        </div>
+        <div style="width: 15%">
+          <p>Feed</p>
+        </div>
+      </div>
+      <div class="categories-list">
+        <div *ngFor="let catgy of categoryData">
+          <ion-menu-toggle>
+            <ion-item>
+              <ion-label>{{catgy.name}}</ion-label>
+              <ion-toggle slot="end" (ionChange)="blockPushNotice($event,catgy._id)"
+                [checked]="!catgy.blocked_push_notify_users.length"></ion-toggle>
+              <ion-toggle slot="end" (ionChange)="blockCategory($event,catgy._id)"
+                [checked]="!catgy.blocked_feed_users.length"></ion-toggle>
+            </ion-item>
+          </ion-menu-toggle>
+        </div>
+      </div>
+    </ion-list>
+  </ion-card>
+</ion-content>

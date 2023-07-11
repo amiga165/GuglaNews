@@ -1,0 +1,76 @@
+ion-card{
+    ion-card-header{
+        display: flex;
+        justify-content: center;
+        img{
+            height: 100px;
+            width: 85%;
+        }
+    }
+}
+
+ion-textarea{
+    border: 1px solid var(--ion-color-medium-tint);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 10px 5px;
+    .textarea-wrapper{
+        min-width: unset;
+        max-width: unset;
+        min-height: unset;
+        max-height: unset;
+        height: 100%;
+      }
+}
+
+.icon{
+    padding-top: 10px;
+}
+
+.flex-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    p{
+        font-size: 12px;
+        padding-top: 5px;
+        a{
+            color: #fff;
+            text-decoration: none;
+        
+        }
+    }
+}
+.flex-row{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 80%;
+    padding: 28px 31px 10px;
+}
+.btn-inner-1{
+    padding: 10px;
+    width: 90%;
+    border-radius: 2px;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.card-contact{
+    background-color: var(--ion-color-step-750);
+    border-radius: 10px;
+    ion-card{
+        padding: 10px;
+        margin: 0;
+        color: var(--ion-color-step-50);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-bottom-right-radius: 134px !important;
+        border-radius: 10px;
+      
+    }
+}

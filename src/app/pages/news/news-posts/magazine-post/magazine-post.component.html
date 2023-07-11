@@ -1,0 +1,93 @@
+<div *ngIf="type.type=='large'">
+  <div class="full-img" style="left: 0;">
+      <!-- <ion-slides #slides>
+          <ion-slide class="ion-no-margin" *ngFor="let img of newsData.image_urls; index as i">
+              <img *ngIf="img" src={{img}} (load)="updateCounter()"/>
+              <ion-img *ngIf="!img" src="https://meebuddy.com/app_files/meebuddy.png"></ion-img>
+              <div class="page-index">
+                <button (click)="prev()"><ion-icon name="chevron-back-outline"></ion-icon></button>
+                <span>{{i+1}}/{{newsData.image_urls.length}} PAGE</span>
+                <button (click)="next()" ><ion-icon name="chevron-forward-outline"></ion-icon></button>
+              </div>
+          </ion-slide>
+      </ion-slides> -->
+
+      <swiper
+
+      [grabCursor]="true"
+      [effect]="'creative'"
+
+      [creativeEffect]="{
+          prev: {
+          shadow: true,
+          origin: 'left center',
+          translate: ['-5%', 0, -200],
+          rotate: [0, 100, 0]
+          },
+          next: {
+          origin: 'right center',
+          translate: ['5%', 0, -200],
+          rotate: [0, -100, 0]
+          }
+      }"
+      class="mySwiper6"
+      >
+      <ng-template swiperSlide *ngFor="let img of newsData.image_urls; index as i">
+        <img appImageLazyLoad *ngIf="img" [ngClass]="{flip: i == 0}" src={{img}} (load)="updateCounter()"/>
+        <ion-img *ngIf="!img" src="https://meebuddy.com/app_files/meebuddy.png"></ion-img>
+        <div class="page-index">
+          <button (click)="prev()"><ion-icon name="chevron-back-outline"></ion-icon></button>
+          <span>{{i+1}}/{{newsData.image_urls.length}} PAGE</span>
+          <button (click)="next()" ><ion-icon name="chevron-forward-outline"></ion-icon></button>
+        </div>
+      </ng-template>
+      
+  </swiper>
+
+  </div>
+  </div> 
+
+  <div *ngIf="type.type=='small'">
+        <ion-item style="cursor: pointer;" detail (click)="redirectToViewNews()">
+            <ion-thumbnail class="ion-margin-end">
+                <ion-img *ngIf="!newsData.image_urls[0]"  src="https://meebuddy.com/app_files/meebuddy.png" (load)="updateCounter()"></ion-img>
+                <ion-img *ngIf="newsData.image_urls[0]" src="{{newsData.image_urls[0]}}"></ion-img>
+            </ion-thumbnail>
+            <ion-label class="ion-text-wrap ion-no-margin category-btn">
+             <!--    <ion-button size="small">category</ion-button><br> -->
+                <ion-text class="wrap">{{newsData.title}}</ion-text>
+                <p>{{common.stringAsDate(time)}}</p>
+                
+            </ion-label>
+
+            <button 
+            style="color: #b00376;
+            background: var(--ion-color-step-50);
+            font-size: 18px;"
+            *ngIf="edit.check == 'true'">
+                <ion-icon name="create-outline" ></ion-icon>
+              
+            </button>
+
+            <button 
+            style="color: green;
+            background: var(--ion-color-step-50);
+            border: 1px solid green;
+            border-radius: 2px;
+            padding: 2px 4px;
+            font-size: .6em;
+            position: absolute;
+            right: 35px;
+            bottom: 4px;;"
+            *ngIf="edit.check == 'true'">
+               status 
+            </button>
+
+        </ion-item>
+
+
+</div> 
+
+
+
+

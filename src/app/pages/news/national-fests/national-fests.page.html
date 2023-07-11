@@ -1,0 +1,175 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar no-border>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <img src="assets/fests/home/menu.svg" />
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title> TECKZITE'23 </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <img src="assets/fests/home/notification.svg" />
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="banner">
+    <img src="assets/fests/home/CDP.png" />
+
+    <div class="search">
+      <ion-input  placeholder="Search for events"
+        ><ion-icon name="search"></ion-icon
+      ></ion-input>
+      <ion-button slot="end">
+        <img src="assets/fests/home/filter.svg" />
+      </ion-button>
+    </div>
+  </div>
+
+  <div class="title">
+    <h2>Popular Events</h2>
+
+    <p (click)="redirectToEventPage()">See all</p>
+  </div>
+
+  <div class="event-slider">
+    <ion-slides [options]="optionsForSlides" class="default-left-padding">
+      <ion-slide
+        (click)="redirectToEventPage()"
+        *ngFor="let event of EventsList"
+      >
+        <ion-col class="ion-text-left">
+          <ion-card style="background-color: white">
+            <ion-card-header class="ion-no-padding">
+              <img [src]="event.eveImg" />
+            </ion-card-header>
+
+            <ion-card-content>
+              <h2 style="line-height:20px" class="eventname">{{event.eveName}}</h2>
+              <p class="date" [innerHTML]="event.timeline"></p>
+              <p class="location">
+                <ion-icon name="cash"></ion-icon>&nbsp;&nbsp;Prize Money :
+                {{event.prizeMoney}}
+              </p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <div class="title" style="padding: 12px 26px 10px 26px;">  
+    <h2>Workshops</h2>
+
+    <p (click)="redirectToEventPage()">See all</p>
+  </div>
+
+  <div class="workshop-slider">
+    <ion-slides [options]="optionsForSlides" class="default-left-padding">
+      <ion-slide
+        *ngFor="let ws of WorkshopsList"
+      >
+        <ion-card (click)="redirectToWorkshopPage(ws.sno)" style="background-color: white">
+          <img [src]="ws.photo" />
+          <ion-card-content>
+            <h2 style="line-height:20px" class="eventname">{{ws.wrk_name}}</h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <div class="default-top-padding title">
+    <h2>Live right now</h2>
+
+    <p>See all</p>
+  </div>
+
+  <!-- LIVE EVENTS -->
+  <div *ngFor="let slide of all_news_data">
+    <div *ngIf="slide.type=='ImagePost'">
+      <app-image-post
+        [postData]="slide"
+        [newsData]="slide.news"
+        [time]="slide.createdAt"
+        [edit]="{'check':'false'}"
+        [news_id]="slide._id"
+        [type]="{'type':'small'}"
+      ></app-image-post>
+    </div>
+
+    <div *ngIf="slide.type=='VideoPost'">
+      <app-video-post
+        [postData]="slide"
+        [newsData]="slide.news"
+        [time]="slide.createdAt"
+        [edit]="{'check':'false'}"
+        [news_id]="slide._id"
+        [type]="{'type':'small'}"
+      ></app-video-post>
+    </div>
+
+    <div *ngIf="slide.type=='URLPost'">
+      <app-url-post
+        [postData]="slide"
+        [newsData]="slide.news"
+        [time]="slide.createdAt"
+        [edit]="{'check':'false'}"
+        [news_id]="slide._id"
+        [type]="{'type':'small'}"
+      ></app-url-post>
+    </div>
+
+    <div *ngIf="slide.type=='Poll'">
+      <app-poll-post
+        [postData]="slide"
+        [newsData]="slide.news"
+        [time]="slide.createdAt"
+        [news_id]="slide._id"
+        [type]="{'type':'small'}"
+      ></app-poll-post>
+    </div>
+
+    <div *ngIf="slide.type=='Magazine'">
+      <app-magazine-post
+        [postData]="slide"
+        [newsData]="slide.news"
+        [edit]="{'check':'false'}"
+        [time]="slide.createdAt"
+        [news_id]="slide._id"
+        [type]="{'type':'small'}"
+      ></app-magazine-post>
+    </div>
+
+    <div *ngIf="slide.type=='Quiz'">
+      <app-quiz-post
+        [postData]="slide"
+        [newsData]="slide.news"
+        [time]="slide.createdAt"
+        [news_id]="slide._id"
+        [type]="{'type':'small'}"
+      ></app-quiz-post>
+    </div>
+
+    <div *ngIf="slide.type=='Survey'">
+      <app-survey-post
+        [postData]="slide"
+        [newsData]="slide.news"
+        [time]="slide.createdAt"
+        [news_id]="slide._id"
+        [type]="{'type':'small'}"
+      ></app-survey-post>
+    </div>
+  </div>
+
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingText="Please wait..."
+      loadingSpinner="bubbles"
+    ></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

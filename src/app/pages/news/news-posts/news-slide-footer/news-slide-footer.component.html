@@ -1,0 +1,64 @@
+<ion-footer style="left: 0;">    
+<!-- <div class="likes" style="margin-top:-10px;text-align: left;">{{datetime(newsData.createdAt)}}</div> -->
+  <ion-row class="news-footer-row">
+    <!-- left of footer -->
+    <div class="news-footer-row-left"> 
+      <!-- like -->
+
+      <div class="likes" style="width: 100%;">
+        <span style="width: 55%;" class="news-footer-item up-like" (click)='like(newsData._id)'>
+          <img style="height: 25px;width: 25px;margin-bottom:2px; filter:'invert(48%) sepia(79%) saturate(2476%) hue-rotate(195deg) brightness(118%) contrast(119%)'" *ngIf='liked' src="assets/footer/Like_fill.svg" alt="LikedO"/>
+          <img style="height: 25px;width: 25px;margin-bottom:2px; filter: invert(45%);" *ngIf='!liked' src="assets/footer/Like_outline.svg" alt="LikedF"/>
+
+          <!-- <ion-icon name="thumbs-up" [ngClass]="{'down-like':liked}" [ngStyle]="{'color': liked ? '#0086f8' : ''}" *ngIf='liked'></ion-icon>
+          <ion-icon name="thumbs-up-outline" [ngStyle]="{'color': liked ? '#0086f8' : 'grey'}" *ngIf='!liked'></ion-icon> -->
+          <span class="down-content" >{{commin.nFormatter(newsData.likes+newsData.views)}}</span>
+        </span>
+        <!-- dislike -->
+        <span style="width:40%" class="news-footer-item" (click)='dislike(newsData._id)'>
+          <img style="height: 23px;width: 23px;margin-top:2px; filter:'invert(48%) sepia(79%) saturate(2476%) hue-rotate(195deg) brightness(118%) contrast(119%)'" *ngIf='disliked' src="assets/footer/Dislike_fill.svg" alt="DislikedO"/>
+          <img style="height: 23px;width: 23px;margin-top:2px; filter: invert(45%);" *ngIf='!disliked' src="assets/footer/Dislike_outline.svg" alt="DislikedF"/>
+          <!-- <ion-icon name="thumbs-down" [ngClass]="{'down-like':disliked}" [ngStyle]="{'color': disliked ? '#0086f8' : ''}" *ngIf='disliked'></ion-icon>
+          <ion-icon name="thumbs-down-outline" [ngStyle]="{'color': disliked ? '#0086f8' : 'grey'}" *ngIf='!disliked'></ion-icon> -->
+          <!-- <span class="down-content">{{newsData.dislikes}}</span> -->
+        </span>
+      </div>
+      <!-- comment -->
+      <span class="news-footer-item" (click)='presentModal()'>
+        <!-- <ion-icon name="chatbox-ellipses-outline"></ion-icon> -->
+        <img style="height: 25px;width: 25px;" src="assets/footer/Comment.svg" alt="Comments"/>
+
+        <!-- <span class="down-content" >Comment</span> -->
+      </span>
+    </div>
+
+    <div class="middle_space"></div> 
+    <!-- right of footer -->
+      <div class="news-footer-row-right" *ngIf='newsData.approval_status==="verified"'>
+        
+        <!-- <span class="news-footer-item" (click)='saveimage()'>
+          <img style="height: 22px;width: 22px;" src="assets/footer/Download.svg" alt="download"/>
+        </span> -->
+
+        <!-- <span class="news-footer-item" (click)='presentReportModal()'>
+          <ion-icon name="flag" style='color:#a30808;font-size: 25px;'></ion-icon>
+        </span>  -->
+
+        <span class="news-footer-item" (click)='whatsappshare()'>
+          <img style="height: 22px;width: 22px;" src="assets/footer/WhatsApp.svg" alt="WhatsApp"/>
+        </span> 
+
+
+         <!-- <span class="news-footer-item" (click)='share()'>
+          <img style="height: 22px;width: 22px;" src="assets/footer/Share.svg" alt="share"/>
+        </span> -->
+
+         <span class="news-footer-item" (click)='showDetails()'>
+          <img style="height: 22px;width: 22px;" src="assets/footer/Dots.png" alt="share"/>
+        </span>
+               
+        
+        
+      </div>
+  </ion-row>
+</ion-footer>

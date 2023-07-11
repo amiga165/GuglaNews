@@ -1,0 +1,169 @@
+<ion-content class="content">
+  <div class="sign_in">
+    <div style="
+        height: 25vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        margin-bottom: 60px;
+      ">
+      <img *ngIf="appTheme !== 'dark'" src="assets/icon/logo_b.png" style="width: 80%; height: 65px;" />
+      <img *ngIf="appTheme == 'dark'" src="assets/icon/logo_w.png" style="width: 80%; height: 65px;" />
+    </div>
+    <ion-segment mod="md" [(ngModel)]="segment">
+      <ion-segment-button value="0" (click)="changeTab('0')">
+        Register
+      </ion-segment-button>
+      <ion-segment-button value="1" (click)="changeTab('1')">
+        Login
+      </ion-segment-button>
+    </ion-segment>
+    <br />
+    <div [ngSwitch]="segment">
+      <div text-left class="login_form" *ngSwitchCase="0">
+        <ion-row>
+          <ion-col *ngIf="forget" size="12">
+            <p class="re-create">
+              Re create your account
+            </p>
+          </ion-col>
+          <!-- <ion-col size="12" size-md="8" offset-md="2">
+
+            <ion-item lines="none">
+              <ion-label position="fixed">
+                <ion-icon name="call"></ion-icon>
+              </ion-label>
+              <ion-input [(ngModel)]="formData.mobile_num" type="tel" placeholder="Enter Mobile Number" maxlength="10"
+                pattern="[6-9]{1}[0-9]{9}"></ion-input>
+            </ion-item>
+          </ion-col> -->
+
+          <ion-col size="12" size-md="8" offset-md="2" class="phone-input">
+            <ion-item lines="none">
+              <ion-label position="fixed">
+                <ion-icon name="call"></ion-icon>
+              </ion-label>
+              <input ng2TelInput type="tel" placeholder="Enter Mobile Number" maxlength="10"
+                pattern="[6-9]{1}[0-9]{9}" [(ngModel)]="formData.mobile_num" 
+                (countryChange)="onCountryChange($event)"
+                [ng2TelInputOptions]="{initialCountry: 'in', preferredCountries: ['qa','in']}"
+                />
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12" size-md="8" offset-md="2">
+            <ion-item lines="none">
+              <ion-label position="fixed">
+                <ion-icon name="mail-open-outline"></ion-icon>
+              </ion-label>
+              <ion-input [(ngModel)]="formData.email" type="text" placeholder="Email(Optional)" pattern="\S+@\S+\.\S+">
+              </ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" size-md="8" offset-md="2">
+            <ion-item lines="none">
+              <ion-label position="fixed">
+                <ion-icon name="key"></ion-icon>
+              </ion-label>
+              <ion-input [(ngModel)]="formData.password" type="password" placeholder="New Password"></ion-input>
+            </ion-item>
+          </ion-col>
+          <!-- <ion-col size="12" size-md="8" offset-md="2">
+            <ion-item lines="none">
+              <ion-label position="fixed"
+                ><ion-icon name="people-outline"></ion-icon
+              ></ion-label>
+              <ion-input
+                [(ngModel)]="formData.referral_code"
+                type="text"
+                placeholder="Referral Code (Optional)"
+              ></ion-input>
+            </ion-item>
+          </ion-col> -->
+        </ion-row>
+        <ion-row>
+          <ion-col size="2">
+            <ion-button class="btn-bg" (click)="signup('1')" *ngIf="!page_type">
+              Skip
+            </ion-button>
+          </ion-col>
+          <ion-col size="2">
+            <ion-button class="btn-bg" (click)="dismiss()" *ngIf="page_type">
+              Close
+            </ion-button>
+          </ion-col>
+          <ion-col size="8">
+            <ion-button class="btn-bg" expand="block" (click)="accept_polices()" [disabled]="pageData.login_lock">
+              Continue
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+      <div *ngSwitchCase="1">
+        <div text-left class="login_form">
+          <ion-row class="phone-input">
+            <ion-col size="12" size-md="8" offset-md="2">
+              <ion-item lines="none">
+                <ion-label position="fixed">
+                  <ion-icon name="call"></ion-icon>
+                </ion-label>
+                <input  ng2TelInput type="tel" placeholder="Enter Mobile Number" maxlength="10"
+                  pattern="[6-9]{1}[0-9]{9}" [(ngModel)]="formData.mobile_num" 
+                  (countryChange)="onCountryChange($event)"
+                  [ng2TelInputOptions]="{initialCountry: 'in', preferredCountries: ['qa','in']}"
+                  />
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <!-- <ion-col size="12" size-md="8" offset-md="2">
+              <ion-item lines="none">
+                <ion-label position="fixed">
+                  <ion-icon name="call"></ion-icon>
+                </ion-label>
+                <ion-input [(ngModel)]="formData.mobile_num" type="tel" placeholder="Enter Mobile Number" maxlength="10"
+                  pattern="[6-9]{1}[0-9]{9}"></ion-input>
+              </ion-item>
+            </ion-col> -->
+
+            <ion-col size="12" size-md="8" offset-md="2">
+              <ion-item lines="none">
+                <ion-label position="fixed">
+                  <ion-icon name="key"></ion-icon>
+                </ion-label>
+                <ion-input [(ngModel)]="formData.password" type="password" placeholder="Password"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" class="ion-text-center" (click)="forget_reset()">
+              <p style="color: #0086f8; font-weight: 500" text-center>
+                Forget/reset your password
+              </p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="2">
+              <ion-button class="btn-bg" (click)="signup('1')" *ngIf="!page_type">
+                Skip
+              </ion-button>
+            </ion-col>
+            <ion-col size="2">
+              <ion-button class="btn-bg" (click)="dismiss()" *ngIf="page_type">
+                Close
+              </ion-button>
+            </ion-col>
+            <ion-col size="8">
+              <ion-button class="btn-bg" expand="block" (click)="accept_polices()" [disabled]="pageData.login_lock">
+                Continue
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<!-- (ng2TelOutput)="getNumber($event)"
+(intlTelInputObject)="telInputObject($event)" -->

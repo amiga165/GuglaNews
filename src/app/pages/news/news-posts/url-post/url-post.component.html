@@ -1,0 +1,29 @@
+<div class="overlay" *ngIf="type.type=='large'">
+  <iframe width="100%" 
+          height="100%"  
+          scrolling="auto"  
+          [src]="get(newsData.url)" 
+          frameborder="0" 
+          allowfullscreen>
+  </iframe>
+</div>
+
+
+
+
+  <ion-list *ngIf="type.type == 'small'" (click)="redirectToViewNews()">
+   
+      <ion-item lines="full" detail style="cursor: pointer;">
+          <ion-thumbnail class="ion-margin-end">
+              <ion-img *ngIf="!newsData.image" src="assets/imgs/live_updates.jpg"></ion-img>
+              <ion-img *ngIf="newsData.image" src="{{newsData.image}}"></ion-img>
+          </ion-thumbnail>
+          <ion-label class="ion-text-wrap ion-no-margin">
+            <h3 style="margin: 0;padding: 0;">{{newsData.title}}</h3>
+            <ion-text class="wrap"></ion-text>
+            <p>{{common.stringAsDate(time)}}</p>
+          </ion-label>
+      </ion-item>
+
+  
+  </ion-list>

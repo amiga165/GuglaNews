@@ -1,0 +1,65 @@
+<ion-content>
+  <ion-buttons style="position: absolute; margin: 10px; border-radius: 50%;
+  background: #ffffff54;">
+    <ion-button (click)="back()"><ion-icon style="color: white" name="arrow-back-outline"></ion-icon></ion-button>
+  </ion-buttons>
+
+  <div class="event">
+    <img [src]="Workshop.photo" />
+
+    <ion-card class="ion-no-margin ion-no-padding">
+      <ion-card-header>
+        <ion-card-title>{{Workshop.wrk_name}}</ion-card-title>
+
+        <ion-card class="detail">
+          <ion-card-content class="ion-no-padding">
+            <ion-row >
+              <ion-col size="3">
+                <h4>Department</h4>
+                <div><img src="assets/fests/teckzite/dept.png"></div>
+                <p>{{Workshop.branch}}</p>
+              </ion-col>
+              <ion-col size="6" >
+                <h4>Participation Amount</h4>
+                <div style="height:60px; width:60px"><img src="assets/fests/teckzite/entry.png"></div>
+                <p>{{Workshop.amount}}/-</p>
+              </ion-col>
+              <ion-col size="3">
+                <h4>Duration</h4>
+                <div><img src="assets/fests/teckzite/clock.png"></div>
+                <p>{{Workshop.duration}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="info">
+          <h3>Venue & Date</h3>
+          <p [innerHTML]="Workshop?.venue_time"></p>
+        </div>
+        <div class="info">
+          <h3>Description</h3>
+          <p [innerHTML]="Workshop?.wrk_des"></p>
+        </div>
+        <div class="info">
+          <h3>About Workshop</h3>
+          <p [innerHTML]="Workshop?.wrk_info"></p>
+        </div>
+        <div class="info">
+          <h3>Mentors</h3>
+          <p [innerHTML]="Workshop?.mentor_info"></p>
+        </div>
+        <div class="info">
+          <h3>Contact</h3>
+          <p [innerHTML]="Workshop?.ph_no"></p>
+        </div>
+        <div class="register">
+          <a href="https://teckzite.org/workshop_reg.php?workname={{Workshop?.wrk_name}}">Register</a>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

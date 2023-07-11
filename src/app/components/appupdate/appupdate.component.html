@@ -1,0 +1,23 @@
+<ion-content>
+    <div style="display: flex;
+    justify-content: center;
+    font-size: 1.4em;
+    padding-bottom: 5px;
+    height: 50px;
+    color: white;
+    background: #0086f8;
+    align-items: center;"
+    >
+    <ion-text>
+    News Version Available 
+    </ion-text>
+    <ion-buttons
+    style="position: absolute;right: 10px;top: 10px;"
+    (click)="close_modal()">
+    <ion-button>
+    <ion-icon name="close"></ion-icon>
+    </ion-button>
+    </ion-buttons>
+    </div>
+    <div><a [href]='app_info.url' onclick='window.open(this.href,"_system","location=yes"); '><img [src]='app_info.image_url' style="width: 100%;" ></a></div>
+</ion-content>

@@ -1,0 +1,426 @@
+<div *ngIf="type.type == 'large' && !isexamcompleted(newsData)">
+  
+    <!-- =========POP UP WINDOW============ -->
+    <div class="quiz-popup" *ngIf="!isExamStarted() && !isexamcompleted(newsData); else start">
+      <div class="popup-header">
+        <ion-text style="margin-left: 50px; font-size: 1.5em;">Instructions</ion-text>
+        <ion-icon (click)="back()" name="close-circle"></ion-icon>
+      </div>
+      <div class="popup-title">
+        <ion-text class="ion-text-wrap">{{newsData.title}}</ion-text>
+      </div>
+      <div class="popup-info">
+        <h1>Number of Question : {{newsData.questions.length}}</h1>
+        <!-- <span><p style="font-weight: 500;">Lorem ipsum dolor sit amet.</p></span> -->
+        <p [innerHTML]="newsData.description"></p>
+        
+      </div>
+      <div class="popup-footer" >
+        <ion-button *ngIf="!isCountdownExpired" class="btn-bg" expand="full">{{countdown}}<ion-icon slot="end" name="alarm-outline"></ion-icon></ion-button>
+        <ion-button *ngIf="!user_log() && isCountdownExpired" class="btn-bg" (click)="startexam()" expand="full">START TEST<ion-icon slot="end" name="alarm-outline"></ion-icon></ion-button>
+        <ion-button *ngIf="user_log() && isCountdownExpired" class="btn-bg" (click)="navigate_to_login()" expand="full">Login<ion-icon slot="end" name="alarm-outline"></ion-icon></ion-button>
+      </div>
+    </div>
+  
+  <!-- ==========QUIZ SIZE LARGE=========== -->
+    <ng-template #start>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="presentSubmitAlert()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+          </ion-buttons>
+          <ion-title class="ion-text-wrap">{{newsData.title}}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="questionNav = !questionNav"><ion-icon name="options-outline"></ion-icon></ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+  
+      <ng-container (click)='closetab()'>
+          
+          <!-- =========QUESTION SIDE NAVBAR ==========-->
+            <div class="question-navbar" #questionSideNav *ngIf="questionNav" >
+              <div class="nav-title">
+                  <ion-item>
+                    <ion-label>
+                      <ion-text class="ion-text-wrap">{{newsData.title}}</ion-text>
+                      <ion-text style="font-size: .8em; color: grey;">Question : {{newsData.questions.length}}</ion-text>
+                    </ion-label> 
+                  </ion-item>
+              </div>
+              <div class="nav-buttons">
+                <span>
+                  <button [style.background]="isanswered(newsData._id,questions._id) ? 'green':'grey'" (click)="slideIndex(a)" *ngFor="let questions of newsData.questions; index as a">
+                    {{a+1}}
+                  </button>
+                </span>
+              </div>
+              <div class="nav-footer">
+                  <button ><ion-icon [style.background]="'green'"></ion-icon>Answered</button>
+                  <button ><ion-icon [style.background]="'grey'" ></ion-icon>Unanswered</button>
+              </div>
+            </div>
+  
+  
+          <!-- ============== DISPLAY QUESTIONS ================= -->
+        
+          
+            <ion-slides > 
+              <ion-slide (click)="questionNav = false"  *ngFor='let questions of newsData.questions; index as i'>
+                <div class="question-title">
+                    <span>
+                      <p>Question : {{i+1}}</p>
+                      <!-- <p>+2.0 </p> -->
+                      <!-- <p>-0.5</p> -->
+                    </span>
+                    <ion-buttons slot="end">
+                      <!-- <ion-button ><ion-icon slot="end" name="star-outline"></ion-icon>Mark</ion-button> -->
+                    </ion-buttons>
+                </div>
+        
+                <div class="question">
+                  <p >{{questions.question}}</p> 
+                  <ion-img style="height: 180px;width: 100%;" 
+                          [src]="questions.image"
+                          *ngIf="questions.image"
+                      ></ion-img>
+                </div>
+                <!----------- RADIO OPTIONS------------->
+                <div>
+                  <ion-radio-group > 
+                    <ion-item lines="none" [ngClass]="{'isOptionMarked item-radio-checked': check_option(newsData._id,questions._id,options._id)}" class="options" *ngFor='let options of questions.options' (click)='choose_option(newsData._id,questions._id,options._id,options.key,options.data)' >
+                      <ion-radio  [ngClass]="{'item-radio-checked radio-checked': check_option(newsData._id,questions._id,options._id)}" name="option" ></ion-radio>
+                      <ion-label class="ion-text-wrap" >
+                        {{options.data}}</ion-label>
+                    </ion-item>
+                </ion-radio-group>
+                </div>
+                
+                <!----------- PREV & NEXT BUTTONS ------------->
+                <div style="width: 100%;
+                            display: flex;">
+                  <ion-buttons style="width: 50%; display: flex; justify-content: flex-start;" slot="start">
+                    <ion-button *ngIf="i > 0" (click)="prev()">
+                      <ion-icon slot="start" name="chevron-back-sharp"></ion-icon>
+                      Prev</ion-button>
+                  </ion-buttons>
+                  <ion-buttons style="width: 50%; display: flex; justify-content: flex-end;" slot="end">
+                    <ion-button (click)="next()" [ngStyle]="{'display' : end_of_slide(i,newsData.questions.length) ? 'none' : 'block'}">
+                      <ion-icon slot="end" name="chevron-forward-sharp"></ion-icon>
+                      Next</ion-button>
+                  </ion-buttons>
+                </div>
+  
+              </ion-slide>  
+            </ion-slides>
+      
+  
+  
+            <!----------- SUBMIT BUTTON ------------->
+          <ion-button class="btn-bg" (click)="presentSubmitAlert()" style="margin: 0 30% 2px; padding: 3px;" expand="block">Submit</ion-button>
+  
+          
+      </ng-container>
+    </ng-template>
+  </div>
+  
+  
+  <!-- ==========QUIZ SIZE SMALL=========== -->
+    <div *ngIf="type.type == 'small'">
+      <div class="quiz-items">
+        <!-- <ion-text>
+          <p>Saturday, 12 Feb 2022</p>
+        </ion-text> -->
+        <ion-item style="cursor: pointer;" detail (click)="redirectToViewNews()">
+            <ion-thumbnail class="ion-margin-end ion-margin-bottom" >
+              <ion-img src="assets/imgs/timer-clock.gif"></ion-img>
+              <span>Quiz</span>
+            </ion-thumbnail>
+            <ion-label class="ion-text-wrap ion-no-margin">
+                <ion-text class="wrap">
+                  {{newsData.title}}
+                </ion-text>
+                <div class="itemInfo">
+                  <p style="margin: 0;padding: 0;">{{newsData.questions.length}} Questions</p>
+                  <ion-buttons class="get-start" *ngIf="!isexamcompleted(newsData) && !isExamStarted()" slot="end">
+                    <ion-button><ion-icon slot="start" name="pencil-outline"></ion-icon>Start</ion-button>
+                  </ion-buttons>
+                  <ion-buttons  class="view-result" *ngIf="isexamcompleted(newsData)" slot="end">
+                    <ion-button><ion-icon slot="start" name="eye-outline"></ion-icon>Results</ion-button>
+                  </ion-buttons >
+                  <ion-buttons class="resume" *ngIf="!isexamcompleted(newsData) && isExamStarted()" slot="end">
+                    <ion-button><ion-icon slot="start" name="lock-open-outline"></ion-icon>Resume</ion-button>
+                  </ion-buttons>
+                </div>
+                <p style="margin: 0;padding: 0;font-size: .75em;">{{common.stringAsDate(time)}}</p>
+            </ion-label>
+        </ion-item> 
+      </div>
+  
+    </div>
+  
+  
+  
+  <div class="exam-statistics"
+       style="overflow-y: scroll; height: 92vh; width: 100%;"
+       *ngIf="isexamcompleted(newsData) && type.type == 'large' && !viewSolutionStats"
+      >
+  
+    <ion-header class="sticky">
+      <ion-toolbar>
+        <ion-buttons (click)="back()" slot="start">
+          <ion-button><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+        </ion-buttons>
+        <ion-title>Test Analysis</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click) = "viewSolutionStats = true">SOLUTIONS</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+  
+    <ion-card>
+      <ion-card-content>
+        <ion-item lines="none"> 
+          <ion-label class="ion-text-wrap"><b>{{newsData.title}}</b></ion-label>
+          <ion-avatar><ion-img src="assets/imgs/timer-clock.gif"></ion-img></ion-avatar>
+        </ion-item>
+  
+        <ion-item>
+          <ion-avatar class="flex ion-margin-end"><ion-icon name="checkmark-circle-outline"></ion-icon></ion-avatar>
+          <ion-label>Scored <br>
+            <ion-text>{{correct_answers}} / {{newsData.questions.length}}</ion-text>
+          </ion-label>
+        </ion-item>
+  
+        <!-- <ion-item>
+          <ion-avatar class="flex ion-margin-end"><ion-icon name="star-outline"></ion-icon></ion-avatar>
+          <ion-label>Rank <br>
+            <ion-text>0 / 40</ion-text>
+          </ion-label>
+          <ion-buttons>
+            <ion-button><ion-icon name="refresh-outline"></ion-icon></ion-button>
+          </ion-buttons>
+        </ion-item> -->
+  
+        <!-- <ion-item>
+          <ion-avatar class="flex ion-margin-end"><ion-icon name="alarm-outline"></ion-icon></ion-avatar>
+          <ion-label>Time spent <br>
+            <ion-text>0 / 40</ion-text>
+          </ion-label>
+        </ion-item> -->
+  
+        <ion-item class="ion-margin-top">
+          <div class="score-progress">
+            <div>
+              <ion-text> Question DISTRIBUTION</ion-text>
+            </div>
+            <!-- <div class="progress">
+              <div class="progress-bar">
+                <div class="progress-strength"></div>
+              </div>
+            </div> -->
+            <div class="score-progress-number">
+              <span style="color: green;"><b>{{correct_answers}}</b><p>correct</p></span>
+              <span style="color: red;"><b>{{wrong_answers}}</b><p>wrong</p></span>
+              <span style="color:#a26d0c;;"><b>{{unanswered_questions}}</b><p>Unanswered</p></span>
+            </div>
+          </div>
+        </ion-item>
+  
+        <!-- <ion-item lines="none"> 
+          <ion-label  class="ion-no-margin"
+                      style="display: flex;
+                      justify-content: space-between;
+                      align-content: center;">
+            <ion-buttons>
+              <ion-button>REATTEMPT</ion-button>
+          </ion-buttons>
+          <ion-buttons>
+            <ion-button><ion-icon slot="start" name="share-social-outline"></ion-icon>SCORECARD</ion-button>
+          </ion-buttons>
+          </ion-label>
+        </ion-item> -->
+      </ion-card-content>
+    </ion-card>
+  
+    <!-- <ion-card>
+      <ion-list class="ion-no-padding">
+        <ion-item lines="none" class="ion-justify-content-between">
+          <ion-thumbnail class="ion-margin-end">
+            <ion-img src="assets/imgs/file.jpg"></ion-img>
+          </ion-thumbnail>
+          <ion-label class="ion-no-padding ion-no-margin ion-align-self-center">
+            <ion-text style="font-size: .9em;">Have a doubt?</ion-text>
+            <p style="font-size: .8em; margin: 0;">Get the solution by experts</p>
+            <button style="color: brown; background: none; padding: 0;" >POST NOW</button><br>
+        </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+    <ion-card>
+      <ion-list>
+        <ion-item>
+          <ion-label >
+            <ion-text>Rate this test</ion-text>
+            <p class="ion-text-wrap">We would love to know how was your experience with this test?</p>
+            
+            <span class="rate-us">
+              <button *ngFor="let i of [1,2,3,4,5]"><ion-icon name="star-outline"></ion-icon></button><br>
+            </span>
+        </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+    
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <ion-avatar>
+              <ion-img src="assets/imgs/file.jpg"></ion-img>
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="6">
+            <span><p>Percentile</p><p>26.2%</p></span>
+            <span><p>Accuracy</p><p>23.2%</p></span>
+            <span><p>Attempted</p><p>2.2%</p></span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Top Rankers</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-avatar class="ion-margin-end">
+            <ion-img src="assets/imgs/file.jpg"></ion-img>
+          </ion-avatar>
+          <ion-label>
+            <ion-text>Name of the User</ion-text>
+            <p>35 / 40</p>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card> -->
+  
+  
+  </div>
+  
+  
+  
+  
+  <!-- ==========Display Solutions to User=========== -->
+  
+  <div *ngIf="newsData.show_results && type.type == 'large' && viewSolutionStats ">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="viewSolutionStats = false"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+        </ion-buttons>
+        <ion-title class="ion-text-wrap">{{newsData.title}}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="questionNav = !questionNav"><ion-icon name="options-outline"></ion-icon></ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+  
+  
+          
+      <!-- =========QUESTION SIDE NAVBAR ==========-->
+        <div class="question-navbar" #questionSideNav *ngIf="questionNav" >
+          <div class="nav-title">
+              <ion-item>
+                <ion-label>
+                  <ion-text class="ion-text-wrap">{{newsData.title}}</ion-text>
+                  <ion-text style="font-size: .8em; color: grey;">Question : {{newsData.questions.length}}</ion-text>
+                </ion-label> 
+              </ion-item>
+          </div>
+          <div class="nav-buttons">
+            <span>
+              <button [style.background]="check_choosen_option_nav(questions._id) ? '#28a745':'#dc3545'" (click)="slideIndex(a)" *ngFor="let questions of newsData.questions; index as a">
+                {{a+1}}
+              </button>
+            </span>
+          </div>
+          <div class="nav-footer">
+              <button ><ion-icon [style.background]="'#28a745'"></ion-icon>Correct</button>
+              <button ><ion-icon [style.background]="'#dc3545'" ></ion-icon>Wrong</button>
+          </div>
+        </div>
+  
+  
+      <!-- ============== DISPLAY QUESTIONS ================= -->
+    
+      
+        <ion-slides > 
+          <ion-slide (click)="questionNav = false"  *ngFor='let questions of newsData.questions; index as i'>
+            
+            
+  
+            <div class="question-title">
+                <span>
+                  <p>Question : {{i+1}}</p>
+                  <!-- <p>+2.0 </p> -->
+                  <!-- <p>-0.5</p> -->
+                </span>
+                <ion-buttons slot="end">
+                  <!-- <ion-button ><ion-icon slot="end" name="star-outline"></ion-icon>Mark</ion-button> -->
+                </ion-buttons>
+            </div>
+    
+            <div class="question">
+              <p >{{questions.question}}</p> 
+              <ion-img style="height: 180px;width: 100%;" 
+                      src="questions.image"
+                      *ngIf="questions.image"
+              ></ion-img>
+            </div>
+            <!----------- RADIO OPTIONS------------->
+            <div>
+              <ion-radio-group style="pointer-events: none;"> 
+                <ion-item lines="none" [ngClass]="{'correct': check_correct_option(questions.correct_key,options),'choosen':check_choosen_option(questions._id,options._id)}" class="options" *ngFor='let options of questions.options'  >
+                  
+                  <ion-radio name="option" ></ion-radio>
+                  <ion-label class="ion-text-wrap" >
+                    {{options.key}}.{{options.data}}-</ion-label>
+                </ion-item>
+              </ion-radio-group>
+            </div>
+            
+            <!----------- PREV & NEXT BUTTONS ------------->
+            <ion-buttons class="ion-justify-content-between ion-padding">
+              <ion-button (click)="prev()">
+                <ion-icon slot="start" name="chevron-back-sharp"></ion-icon>
+                Prev</ion-button>
+              <ion-button (click)="next()">
+                <ion-icon slot="end" name="chevron-forward-sharp"></ion-icon>
+                Next</ion-button>
+            </ion-buttons>
+  
+          </ion-slide>  
+        </ion-slides>
+  
+  
+  
+  
+  </div>
+  
+  <div *ngIf="!newsData.show_results && type.type == 'large' && viewSolutionStats">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="viewSolutionStats = false"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
+        </ion-buttons>
+        <ion-title class="ion-text-wrap">{{newsData.title}}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="questionNav = !questionNav"><ion-icon name="options-outline"></ion-icon></ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <div class="ion-no-margin">
+      <app-no-data-found [name]="{'name':'Answers will be displayed soon...'}" ></app-no-data-found>
+    </div> 
+  </div>

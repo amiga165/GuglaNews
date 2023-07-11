@@ -1,0 +1,63 @@
+
+
+<ion-content>
+
+
+    <div style="display: flex;
+                justify-content: center;
+                font-size: 1.4em;
+                padding-bottom: 5px;
+                height: 50px;
+                color: white;
+                background: #0086f8;
+                align-items: center;"
+    >
+        <ion-text>
+            Update Profile Details
+        </ion-text>
+        <ion-buttons
+        style="position: absolute;right: 10px;top: 10px;"
+        (click)="close_modal()">
+          <ion-button>
+              <ion-icon name="close"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+     </div>
+
+    <ion-card>
+        <ion-list>
+
+  
+    
+            <ion-item style="margin-bottom: 10px;">
+                <ion-label position="stacked">Name</ion-label>
+                <ion-input [(ngModel)]="updating_data.name" maxlength="75" placeholder="Name" type="text"></ion-input>
+            </ion-item>
+      
+      
+            <ion-item style="margin-bottom: 10px;">
+                <ion-label position="stacked">Email</ion-label>
+                <ion-input [(ngModel)]="updating_data.email" maxlength="75" placeholder="email" type="text"></ion-input>
+            </ion-item>
+      
+      
+        </ion-list>
+    </ion-card>
+
+
+</ion-content>
+
+
+
+<ion-footer>
+  <ion-list>
+      <ion-item lines="none">
+          <ion-buttons style="background: #0086f8;color: white;" slot=end (click)="submit()">
+              <ion-button>Edit
+              </ion-button>
+          </ion-buttons>
+      </ion-item>
+  </ion-list>
+</ion-footer>
+
+

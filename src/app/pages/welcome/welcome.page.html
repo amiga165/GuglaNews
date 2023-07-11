@@ -1,0 +1,193 @@
+<!-- <ion-content padding text-center id="welcome">
+    <ion-header class="ion-padding">
+        <ion-buttons>
+            <ion-button round outline (click)="back()">
+                <ion-icon name="chevron-back-outline"></ion-icon>
+                    //{{commin.langData.BACK}} 
+            </ion-button>
+            <ion-title slot="end" class="ion-text-center">
+                <h6 style="font: italic bold 16px/35px Georgia, serif">{{commin.langData.UPDATE_YOUR_LOCATION}}</h6>
+            </ion-title>
+        </ion-buttons>
+    </ion-header>
+    <div *ngIf="!center.isOkay(); else locationblock">
+        <img style="justify-content:center;" src="https://meebuddy.com/meebuddy_logo.png" />
+    </div>
+    <ng-template #locationblock>
+        <hr />
+        <ion-item>
+            <ion-label>{{commin.langData.DISTRICT}}</ion-label>
+            <ion-badge slot="end"> {{center.location.district}} </ion-badge>
+        </ion-item>
+        <ion-item>
+            {{commin.langData.MANDAL}}
+            <ion-badge slot="end"> {{center.location.mandal}} </ion-badge>
+        </ion-item>
+        <ion-item>
+            {{commin.langData.STREET_VILLAGE}}
+            <ion-badge slot="end"> {{center.location.village}} </ion-badge>
+        </ion-item>
+        <br />
+    </ng-template>
+    <ion-button (click)="get_location()">
+        <ion-icon name="Location"></ion-icon>GPS Location
+    </ion-button>
+        <ion-label>{{user.address}}</ion-label><br>
+        <ion-label>{{user.latitude}}</ion-label><br>
+        <ion-label>{{user.longitude}}</ion-label><br>
+        <ion-label>{{user.accuracy}}</ion-label>
+        <ion-label>{{user.address1 | json}}</ion-label>
+    <div *ngIf=" !area.state.selected; else selectarea " class="states ">
+        <br />
+        <h6 class="ion-text-center " style="font: italic bold 16px/35px Georgia, serif ">{{commin.langData.SELECT_YOUR_REGION}}</h6>
+        <div *ngFor=" let item of area.state.data;let ind=index; ">
+            <ion-card (click)="select_state(ind) ">
+                <ion-row>
+                    <ion-col text-left col-3>
+                        <img src="{{item.image}} " style="height: 50px; justify-content: center; " />
+                    </ion-col>
+                    <ion-col class="state_name " text-center col-9> {{item.name}} </ion-col>
+                </ion-row>
+            </ion-card>
+        </div>
+    </div>
+    <ng-template #selectarea>
+        <h6 style="text-align: center; color: #ff3399; font: italic bold 16px/35px Georgia, serif ">{{commin.langData.CHOOSE_YOUR_LOCATION}}</h6>
+        <hr />
+        <ion-item>
+            <ion-label>DISTRICT </ion-label>
+            <ion-select [(ngModel)]="area.district.selected " interface="action-sheet " (ionChange)="getMandals() ">
+                <ion-select-option *ngFor="let item of area.district.data " [value]="item._id "> {{item.name}} </ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>{{commin.langData.MANDAL}} </ion-label>
+            <ion-select [(ngModel)]="area.mandal.selected " interface="action-sheet " (ionChange)="getVillages() ">
+                <ion-select-option *ngFor="let item of area.mandal.data " [value]="item._id "> {{item.name}} </ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>{{commin.langData.STREET_VILLAGE}}</ion-label>
+            <ion-select [(ngModel)]="area.village.selected " interface="action-sheet ">
+                <ion-select-option *ngFor="let item of area.village.data " [value]="item._id "> {{item.name}} </ion-select-option>
+            </ion-select>
+        </ion-item>
+        <br />
+        <ion-button round (click)="select_location() " [disabled]="!(area.district.selected && area.mandal.selected && area.village.selected) ">
+            <button>{{commin.langData.CONTINUE}}</button>
+        </ion-button>
+        <br />
+        <br />
+        <img src="assets/imgs/location.png " style="width: 60%; justify-content:center; " />
+    </ng-template> 
+</ion-content> -->
+
+<!-- <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-button round outline (click)="back()">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <ion-title style="font-size: 1.1em;">
+        {{commin.langData.UPDATE_YOUR_LOCATION}}
+    </ion-title>
+  </ion-toolbar> -->
+
+<ion-header>
+
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="back()">
+      <ion-button>
+        <ion-icon
+          name="chevron-back"
+          style="font-size: 1.5em; padding-left: 5px"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title style="margin-right: 30px;">Enter your location</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="welcome">
+  <div class="selector-header">
+    <br />
+    <div class="container">
+      <ion-searchbar
+        (ionInput)="getLocations($event)"
+        placeholder="Enter area name or Pincode"
+        search-icon="location"
+        class="place"
+      ></ion-searchbar>
+
+      <ion-list>
+        <ion-item
+          *ngFor="let item of villages_search"
+          (click)="select_location(item._id)"
+        >
+          <ion-icon name="location-outline"></ion-icon>
+          <ion-label class="ion-text-wrap">
+            <ion-text
+              >{{item.name}}<br />{{item.mandal.name}},{{item.mandal.district.name}}-{{item.pincode}}</ion-text
+            >
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+  <div class="container">
+    <br />
+    <p class="center or">OR</p>
+    <div class="gps-btn">
+      <!-- Select your location with GPS tracker -->
+      <!-- {{user.gps_village}}- {{user.gps_pincode}} - {{user.gps_address | json}} -->
+
+      <ion-list>
+        <ion-item
+          *ngFor="let item of villages_gps"
+          (click)="select_location(item._id)"
+        >
+          <ion-icon name="locate"></ion-icon>
+          <ion-label class="ion-text-wrap">
+            <ion-text
+              >{{item.name}}<br />{{item.mandal.name}},{{item.mandal.district.name}}-{{item.pincode}}</ion-text
+            >
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      <button expand="block" class="btn-inner-1 location" (click)="getGpsVillages()">
+        <ion-icon name="location"></ion-icon>Current Location
+      </button>
+    </div>
+  </div>
+
+  <div class="favourites">
+    <div class="container">
+      <ion-text>
+        <p
+          style="
+            margin: 30px 0 0 0;
+            font-weight: 500;
+            letter-spacing: 1px;
+            font-size: 1em;
+          "
+        >
+          Favourites
+        </p>
+      </ion-text>
+
+      <ion-list>
+        <ion-item
+          *ngFor="let item of villages_recent">
+          <ion-icon name="location-outline" (click)="select_location(item._id)"></ion-icon>
+          <ion-label class="ion-text-wrap" (click)="select_location(item._id)">
+            <ion-text>
+            {{item.name}}<br />{{item.mandal.name}},{{item.mandal.district.name}}-{{item.pincode}}
+            </ion-text>
+          </ion-label>
+          <ion-icon name="close" (click)="removefav(item._id)"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

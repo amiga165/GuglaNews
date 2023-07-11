@@ -1,0 +1,357 @@
+ion-slides {
+    height: 75vh;
+}
+ion-slide{
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.question-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span{ 
+        display: flex;
+        
+        p:first-child{
+            background: lightgray;
+            background: #f2efef;
+            color: #3f0876;
+        }
+        p{
+            font-size: .8em;
+            margin: 5px 1px 5px;
+            padding: 2px 10px;
+            border-radius: 20px;
+        }
+    }
+}
+
+
+
+.question p{
+    max-height: 30vh;
+    overflow-y: scroll;
+    margin: 10px 20px 16px;
+    font-family: Georgia, serif;
+    text-align: left;
+    font-size: .87em;
+    color: var(--ion-background-color-anti);
+}
+
+
+
+.options{
+    height: 35px;
+    display: flex;
+    margin: 10px 15px;
+    border: 2px solid lightgray;
+    border-radius: 20px;
+    
+    ion-radio{
+        margin: 0 10px;
+    }
+    ion-label{
+        font-size: .92em;
+        color: var(--ion-background-color-anti);
+    }
+}
+
+.swiper-slide {
+    display: block;
+}
+
+
+
+// QUIZ NAVIGATION
+
+.question-navbar{
+    height: 92%;
+    overflow-y: scroll;
+    width: 35%;
+    background-color: var(--ion-background-color);
+    position: absolute;
+    z-index: 100;
+    right: 0;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    transition: ease-in-out;
+    .nav-title{
+        ion-label{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    .nav-footer{
+        position: absolute;
+        bottom: 20px;
+        font-size: .9em;
+        display: flex;
+        flex-flow: column;
+        width: 100%;
+        border-top: 1px solid lightgrey;
+        padding-top: 10px;
+        button{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background: none;
+            color: var(--ion-background-color-anti);
+            ion-icon{
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+
+        }
+    }
+    .nav-buttons{
+        span{
+            max-height: 60%;
+            width: 100%;
+            margin: 10px 10px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow-y: scroll;
+            button{
+                border-radius: 50%;
+                display: flex;
+                flex-wrap: wrap;
+                height: 30px;
+                width: 30px;
+                margin: 5px 3px;
+                text-align: center;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                background-color: lightgray;
+            }
+        }
+    }
+}
+
+
+
+.quiz-items{
+    ion-text{
+        p{
+            color: grey;
+            padding-left: 8px;
+            padding-left: 10px;
+        }
+    }
+    ion-img{
+        margin-top: -8px;
+    }
+    
+    span{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background: #0a8cf8;
+        color: white;
+        font-size: .7em;
+    }
+}
+
+.itemInfo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p{
+        color: #959494;
+        font-size: .9em;
+    }
+    .get-start{
+        height: 20px;
+        ion-button{
+            font-size: .8em;
+            color: #f20076;
+        }
+    }
+    .view-result{
+        height: 20px;
+        ion-button{
+            font-size: .8em;
+            color: #009564;
+        }     
+    }
+    .resume{
+        height: 20px;
+        ion-button{
+            font-size: .8em;
+            color: #3d0876;
+        }
+    }
+   
+}
+
+
+.wrap{
+    text-overflow:ellipsis;
+    overflow:hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    font-size: .95em;
+}
+
+
+@keyframes slide {
+    0%{
+        right: -100px;
+    }
+    50%{
+        right: -50px;
+    }
+    100%{
+        right: 0;
+    }
+}
+
+
+//=========POP UP WINDOW============ 
+
+.quiz-popup{
+    height: 100vh;
+    width: 100%;
+    z-index: 120;
+    .popup-header{
+        height: 10%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-left:10px;
+        margin-right: 10px;
+
+        ion-text{
+            font-size: 1.1em;
+            font-weight: 500;
+            color: #9b3974;
+        }
+
+        ion-icon{
+            height: 30px;
+            width: 30px;
+            color: #9b3974;
+            cursor: pointer;
+        }
+    }
+    .popup-title{
+        height: 10%;
+        color: #9b3974;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .popup-info{
+        height: 64%;
+        background: #f0f0f0;
+        padding: 10px;
+        text-align: left;
+        font-size: .9em;
+
+    }
+    .popup-footer{
+        height: 8%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+}
+
+
+.exam-statistics{
+    .sticky{
+        position: sticky;
+        top: 0;
+    }
+    .flex{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        ion-icon{
+            height: 30px;
+            width: 30px;
+        }
+    }
+
+    .progress{
+        height: 6px;
+        border-radius: 2px;
+        width: 100%;
+        margin: 10px auto;
+        .progress-bar{
+            height: 100%;
+            width: 100%;
+            background: grey;
+            .progress-strength{
+                width: 40%;
+                background: green;
+                z-index: 2;
+            }
+        }
+    }
+
+    .score-progress{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        width: 100%;
+
+        ion-text{
+            font-size: .82em;
+            color: grey;
+        }
+        .score-progress-number{
+            display: flex;
+            justify-content: space-between;
+            width: 100%;   
+
+            span{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+        }
+    }
+
+}
+
+.rate-us{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    button{
+        background: none;
+        ion-icon{
+            height: 20px;
+            width: 20px;
+            color: rgb(17, 17, 17);
+        }
+    }
+}
+
+.isOptionMarked{
+    --background:#a7aaa652;
+}
+
+.correct{
+    --background:#28a745 !important;
+    ion-label{
+        color: white !important;
+    }
+}
+.choosen{
+    --background:#dc3545;
+    ion-label{
+        color: white !important;
+    }
+}

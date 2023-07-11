@@ -1,0 +1,582 @@
+// // http://ionicframework.com/docs/theming/
+// // App Global Sass
+// // --------------------------------------------------
+// // Put style rules here that you want to apply globally. These
+// // styles are for the entire app and not just one component.
+// // Additionally, this file can be also used as an entry point
+// // to import other Sass files to be included in the output CSS.
+// //
+// // Shared Sass variables, which can be used to adjust Ionic's
+// // default Sass variables, belong in "theme/variables.scss".
+// //
+// // To declare rules for a specific mode, create a child rule
+// // for the .md, .ios, or .wp mode classes. The mode class is
+// // automatically applied to the <body> element in the app.
+// $color1: #3c0876;
+// $color2: #fa0076;
+// /*ion-card {
+//     border: none !important;
+//     box-shadow: none !important;
+//     border: none !important;
+//     border-style: none !important;
+//     position: relative;
+//     text-align: center;
+//   }*/
+// // .swal-wide{
+// //   width: 400px !important;
+// //   height: 225px !important;
+// // }
+// //       .muted-card{
+// //       border: none !important;
+// //       box-shadow: none !important;
+// //       border: none !important;
+// //       border-style: none !important;
+// //       position: relative;
+// //       text-align: center;
+// // }
+// .skeleton_dashboard {
+//     display: block;
+//     margin-left: 20px;
+//     margin-right: 20px;
+//     margin-top: 5px;
+//     width: auto;
+//     height: 150px;
+//     border: 1px solid #ddd;
+//     //background-color: lightgrey;
+//     //background: linear-gradient(to right, #dddddd , #EEEEEE);
+//     //animation: animatedBar 5s linear infinite;
+//     .rect_box {
+//         display: block;
+//         margin-left: auto;
+//         margin-right: auto;
+//         width: 60px;
+//         height: 60px;
+//         background-color: lightgrey;
+//         background: linear-gradient(to right, #dddddd, #eeeeee);
+//         animation: animatedBar 5s linear infinite;
+//     }
+//     p {
+//         display: block;
+//         margin-left: auto;
+//         margin-right: auto;
+//         background-color: lightgrey;
+//         opacity: 0.5;
+//         height: 1em;
+//         margin-top: 10px;
+//         // position: relative;
+//         background: linear-gradient(to right, #dddddd, #eeeeee);
+//         animation: animatedBar 700ms linear infinite;
+//     }
+// }
+// .list_skeleton {
+//     .box {
+//         margin-top: 5px;
+//         border-radius: 50%;
+//         width: 55px;
+//         height: 55px;
+//         background-color: lightgrey;
+//         background: linear-gradient(to right, #dddddd, #eeeeee);
+//         animation: animatedBar 5s linear infinite;
+//     }
+//     p {
+//         background-color: lightgrey;
+//         opacity: 0.5;
+//         height: 1em;
+//         margin-top: 10px;
+//         position: relative;
+//         background: linear-gradient(to right, #dddddd, #eeeeee);
+//         animation: animatedBar 700ms linear infinite;
+//         &:after {
+//             position: absolute;
+//             display: block;
+//             content: "";
+//             right: 0;
+//             bottom: 0;
+//             top: 0;
+//             background-color: white;
+//         }
+//     }
+// }
+// .rectangle {
+//     .box {
+//         margin-top: 5px;
+//         margin-left: 10px;
+//         margin-right: 10px;
+//         width: auto;
+//         height: 130px;
+//         background-color: lightgrey;
+//         background: linear-gradient(to right, #dddddd, #eeeeee);
+//         animation: animatedBar 1s linear infinite;
+//     }
+// }
+// .grid_type {
+//     .box {
+//         display: block;
+//         margin-left: auto;
+//         margin-right: auto;
+//         margin-top: 5px;
+//         border-radius: 50%;
+//         width: 60px;
+//         height: 60px;
+//         background-color: lightgrey;
+//         background: linear-gradient(to right, #dddddd, #eeeeee);
+//         animation: animatedBar 5s linear infinite;
+//     }
+// }
+// .bg-muted {
+//     background-color: #f4f4f7;
+//     ion-card ion-row {
+//         margin-left: -5px !important;
+//         margin-right: -5px !important;
+//     }
+// }
+// a {
+//     text-decoration: none;
+// }
+// button {
+//     text-transform: capitalize !important;
+// }
+// // .toolbar-background-md {
+// //     font-color: green;
+// //     background: -webkit-gradient(to right, $color1, $color2);
+// //     background: -o-linear-gradient(to right, $color1, $color2);
+// //     background: -moz-linear-gradient(to right, $color1, $color2);
+// //     background: linear-gradient(to right, $color1, $color2);
+// //     background-repeat: repeat-x;
+// // }
+// // .toolbar-background-ios {
+// //     background: -webkit-gradient(to right, $color1, $color2);
+// //     background: -o-linear-gradient(to right, $color1, $color2);
+// //     background: -moz-linear-gradient(to right, $color1, $color2);
+// //     background: linear-gradient(to right, $color1, $color2);
+// //     background-repeat: repeat-x;
+// // }
+// .toolbar-title-md {
+//     color: white;
+// }
+// .toolbar-title-ios {
+//     color: white;
+// }
+// .toolbar-background-md .item-md {
+//     background-color: transparent;
+//     color: white;
+// }
+// .toolbar ion-icon {
+//     color: white;
+// }
+// .item-ios {
+//     background-color: transparent;
+//     color: white;
+// }
+// // ion-list {
+// //     --ion-background-color: transparent !important;
+// //     --ion-border-color: transparent !important;
+// // }
+// .item .item-content {
+//     background-color: transparent !important;
+// }
+// #notification-button {
+//     position: relative;
+//     width: 62px;
+//     top: 1px;
+//     right: 1px;
+//     overflow: visible !important;
+// }
+// #notification-icon {
+//     width: 102px;
+// }
+// #notifications-badge {
+//     background-color: red;
+//     position: absolute;
+//     top: -3px;
+//     right: -3px;
+//     border-radius: 100%;
+// }
+// hr {
+//     border-bottom: 1px solid white;
+// }
+// #button1 {
+//     font-size: 16px;
+//     color: white;
+//     font-weight: bolder;
+//     padding: 5px;
+//     border: 2px solid white;
+//     background-color: transparent;
+//     min-width: 40%;
+//     margin-left: 10px;
+//     margin-right: 10px;
+// }
+// .showButton {
+//     border: 1px solid white;
+//     font-weight: bolder;
+//     button {
+//         color: white !important; // button text color
+//         background-color: rgb(195, 43, 226) !important;
+//         //button bg color
+//     }
+// }
+// .toolbar-background-md {
+//     button {
+//         ion-icon {
+//             width: 20px;
+//         }
+//     }
+// }
+// @keyframes dropping-network-toast {
+//     from {
+//         opacity: 0;
+//         visibility: hidden;
+//         height: 0px;
+//         font-size: 0px;
+//         padding-top: 0px;
+//     }
+//     to {
+//         opacity: 1;
+//         visibility: visible;
+//         font-size: 18px;
+//         height: 35px;
+//         padding-top: 5px;
+//     }
+// }
+// @keyframes trashing-network-toast {
+//     0% {
+//         opacity: 1;
+//         visibility: visible;
+//         font-size: 18px;
+//         height: 35px;
+//         padding-top: 5px;
+//         background-color: red;
+//     }
+//     40% {
+//         opacity: 1;
+//         visibility: visible;
+//         font-size: 18px;
+//         height: 35px;
+//         padding-top: 5px;
+//         background-color: rgb(9, 175, 9);
+//     }
+//     100% {
+//         opacity: 0;
+//         visibility: hidden;
+//         height: 0px;
+//         font-size: 0px;
+//         padding-top: 0px;
+//     }
+// }
+// .network-toast-on {
+//     text-align: center;
+//     background-color: green;
+//     animation: trashing-network-toast 0.7s 1 forwards;
+// }
+// .network-toast-off {
+//     text-align: center;
+//     background-color: red;
+//     animation: dropping-network-toast 0.5s 1 forwards;
+// }// http://ionicframework.com/docs/theming/
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+$color1: #3c0876;
+$color2: #fa0076;
+
+/*ion-card {
+        border: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-style: none !important;
+        position: relative;
+        text-align: center;
+       
+      }*/
+
+// .swal-wide{
+//   width: 400px !important;
+//   height: 225px !important;
+// }
+//       .muted-card{
+//       border: none !important;
+//       box-shadow: none !important;
+//       border: none !important;
+//       border-style: none !important;
+//       position: relative;
+//       text-align: center;
+// }
+.skeleton_dashboard {
+  display: block;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 5px;
+  width: auto;
+  height: 150px;
+  border: 1px solid #ddd;
+  //background-color: lightgrey;
+  //background: linear-gradient(to right, #dddddd , #EEEEEE);
+  //animation: animatedBar 5s linear infinite;
+  .rect_box {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60px;
+    height: 60px;
+    background-color: lightgrey;
+    background: linear-gradient(to right, #dddddd, #eeeeee);
+    animation: animatedBar 5s linear infinite;
+  }
+  p {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: lightgrey;
+    opacity: 0.5;
+    height: 1em;
+    margin-top: 10px;
+    // position: relative;
+    background: linear-gradient(to right, #dddddd, #eeeeee);
+    animation: animatedBar 700ms linear infinite;
+  }
+}
+
+.list_skeleton {
+  .box {
+    margin-top: 5px;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    background-color: lightgrey;
+    background: linear-gradient(to right, #dddddd, #eeeeee);
+    animation: animatedBar 5s linear infinite;
+  }
+  p {
+    background-color: lightgrey;
+    opacity: 0.5;
+    height: 1em;
+    margin-top: 10px;
+    position: relative;
+    background: linear-gradient(to right, #dddddd, #eeeeee);
+    animation: animatedBar 700ms linear infinite;
+    &:after {
+      position: absolute;
+      display: block;
+      content: "";
+      right: 0;
+      bottom: 0;
+      top: 0;
+      background-color: white;
+    }
+  }
+}
+
+.rectangle {
+  .box {
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: auto;
+    height: 130px;
+    background-color: lightgrey;
+    background: linear-gradient(to right, #dddddd, #eeeeee);
+    animation: animatedBar 1s linear infinite;
+  }
+}
+
+.grid_type {
+  .box {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background-color: lightgrey;
+    background: linear-gradient(to right, #dddddd, #eeeeee);
+    animation: animatedBar 5s linear infinite;
+  }
+}
+
+.bg-muted {
+  background-color: #f4f4f7;
+  ion-card ion-row {
+    margin-left: -5px !important;
+    margin-right: -5px !important;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  text-transform: capitalize !important;
+}
+
+.toolbar-background-md {
+  // font-color: green;
+  // background: -webkit-gradient(to right, $color1, $color2);
+  // background: -o-linear-gradient(to right, $color1, $color2);
+  // background: -moz-linear-gradient(to right, $color1, $color2);
+  // background: linear-gradient(to right, $color1, $color2);
+  // background-repeat: repeat-x;
+}
+
+.toolbar-background-ios {
+  background: -webkit-gradient(to right, $color1, $color2);
+  background: -o-linear-gradient(to right, $color1, $color2);
+  background: -moz-linear-gradient(to right, $color1, $color2);
+  background: linear-gradient(to right, $color1, $color2);
+  background-repeat: repeat-x;
+}
+
+.toolbar-title-md {
+  color: white;
+}
+
+.toolbar-title-ios {
+  color: white;
+}
+
+.toolbar-background-md .item-md {
+  background-color: transparent;
+  color: white;
+}
+
+.toolbar ion-icon {
+  color: white;
+}
+
+.item-ios {
+  background-color: transparent;
+  color: white;
+}
+
+#notification-button {
+  position: relative;
+  width: 62px;
+  top: 1px;
+  right: 1px;
+  overflow: visible !important;
+}
+
+#notification-icon {
+  width: 102px;
+}
+
+#notifications-badge {
+  background-color: red;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  border-radius: 100%;
+}
+
+hr {
+  border-bottom: 1px solid white;
+}
+
+#button1 {
+  font-size: 16px;
+  color: white;
+  font-weight: bolder;
+  padding: 5px;
+  border: 2px solid white;
+  background-color: transparent;
+  min-width: 40%;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.showButton {
+  border: 1px solid white;
+  font-weight: bolder;
+  button {
+    color: white !important; // button text color
+    background-color: rgb(195, 43, 226) !important;
+    //button bg color
+  }
+}
+
+.toolbar-background-md {
+  button {
+    ion-icon {
+      width: 20px;
+    }
+  }
+}
+
+@keyframes dropping-network-toast {
+  from {
+    opacity: 0;
+    visibility: hidden;
+    height: 0px;
+    font-size: 0px;
+    padding-top: 0px;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+    font-size: 18px;
+    height: 35px;
+    padding-top: 5px;
+  }
+}
+
+@keyframes trashing-network-toast {
+  0% {
+    opacity: 1;
+    visibility: visible;
+    font-size: 18px;
+    height: 35px;
+    padding-top: 5px;
+    background-color: red;
+  }
+  40% {
+    opacity: 1;
+    visibility: visible;
+    font-size: 18px;
+    height: 35px;
+    padding-top: 5px;
+    background-color: rgb(9, 175, 9);
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    height: 0px;
+    font-size: 0px;
+    padding-top: 0px;
+  }
+}
+
+.network-toast-on {
+  text-align: center;
+  background-color: green;
+  animation: trashing-network-toast 0.7s 1 forwards;
+}
+
+.network-toast-off {
+  text-align: center;
+  background-color: red;
+  animation: dropping-network-toast 0.5s 1 forwards;
+}
+
+//jagadeesh
+
+ion-item {
+  --inner-border-width: 0 !important;
+  height: 35px;
+}
+
+hr {
+  width: 90%;
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.521);
+}

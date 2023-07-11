@@ -1,0 +1,387 @@
+<ion-content>
+  <div class="grid_type" *ngIf="preloader; else newsblock">
+    <ion-card>
+      <ion-skeleton-text animated style="height: 160px"></ion-skeleton-text>
+    </ion-card>
+    <ion-grid>
+      <ion-row class="ion-no-padding" *ngFor="let i of [0]">
+        <ion-col *ngFor="let j of [0]">
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <ng-template #newsblock>
+    <!-- ===============HOME HEADER============== -->
+    <div class="">
+
+ 
+
+    <div
+      class="header"
+    >
+      <ion-input
+        style="margin-left: 12px"
+        [routerLink]="['/news/search']"
+        placeholder="Search"
+        ><ion-icon name="search"></ion-icon
+      ></ion-input>
+
+      <ion-buttons
+        style="margin-right: -16px; padding: 0"
+        *ngIf="!user.isGuestUser()"
+      >
+        <ion-button [routerLink]="['/news/addnews']"
+          ><ion-icon name="add-circle-outline"></ion-icon
+        ></ion-button>
+      </ion-buttons>
+      <ion-buttons
+        style="margin-right: -16px; padding: 0"
+        *ngIf="user.isGuestUser()"
+      >
+        <ion-button [routerLink]="['/signup']"
+          ><ion-icon name="add-circle-outline"></ion-icon
+        ></ion-button>
+      </ion-buttons>
+
+      <ion-buttons style="margin-top: 2px" *ngIf="!user.isGuestUser()">
+        <ion-button [routerLink]="['/news/addnews']">My Posts</ion-button>
+      </ion-buttons>
+      <ion-buttons style="margin-top: 2px" *ngIf="user.isGuestUser()">
+        <ion-button [routerLink]="['/signup']">My Posts</ion-button>
+      </ion-buttons>
+
+      <ion-buttons class="ion-padding-end" *ngIf="!user.isGuestUser()">
+        <ion-button [routerLink]="['/news/userProfile']"
+          ><ion-icon name="person-circle-outline"></ion-icon
+        ></ion-button>
+      </ion-buttons>
+      <ion-buttons class="ion-padding-end" *ngIf="user.isGuestUser()">
+        <ion-button [routerLink]="['/signup']"
+          ><ion-icon name="person-circle-outline"></ion-icon
+        ></ion-button>
+      </ion-buttons>
+    </div>
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content> </ion-refresher-content>
+    </ion-refresher>
+
+    <!-- =============MEDIUM SIZE SLIDES========== -->
+    <div style="width: 95%;">
+      <!-- <div style="padding: 10px">
+        <img src="assets/HomeBanner.svg" alt="home" />
+      </div> -->
+
+      <div class="latest-slides" *ngIf="liveData.length">
+     
+      <ion-slides [options]="optionsForSlides">
+        <ion-slide *ngFor="let updates of liveData" (click)="redirectToViewNews(updates._id,updates.type)">
+          <div class="slides" >
+            <img *ngIf="!updates.news.image" src="assets/imgs/live_updates.jpg" />
+            <img *ngIf="updates.news.image" src="{{updates.news.image}}" />
+            <!-- <ion-text>
+              My Feed
+            </ion-text> -->
+          </div> 
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+    
+      <!-- ==========service btns============= -->
+      <div *ngIf="center.data.guest==false">
+        <!-- <div style="display:flex;justify-content:space-around;margin-bottom: 16px;">
+        <ion-button style="width: 40%;" size="small" class="local-btn-bg" routerLink="/app/home/shopping">
+            Local Shops
+        </ion-button>
+        <ion-button style="width:40%;" size="small" class="local-btn-bg" routerLink="/app/home/services">
+            Local Services
+        </ion-button>
+      </div> -->
+
+        <!-- =======referal ========-->
+        <!-- <ion-card class="ion-no-margin" style="margin: 0 10px 20px; padding: 0 10px;">
+      <ion-row class="ion-no-margin"  class="referral" size="12">
+        <ion-col size="2">
+            <ion-thumbnail>
+                <img src="assets/imgs/wallet.png" alt="" />
+            </ion-thumbnail>
+        </ion-col>
+        <ion-col size="7">
+            <ion-label class="ion-no-margin">
+                <ion-text style="font-weight: 500;color: #514747;">Refer and Earn Rewards</ion-text>
+                <p style="font-size: .8em; margin: 0;">Your Referal Code : {{referral_code}}</p>
+            </ion-label>
+        </ion-col>
+        <ion-col size="3">
+            <ion-button style="font-size: .8em;" size="small" (click)="share()">
+                Invite
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    </ion-card> -->
+
+
+        <!-- TECKZITE'23-->
+        <!-- <ion-card class="teckzite-card" (click)="teckziteEventsPage()">
+          <ion-card-content>
+            <div><img src="assets/fests/teckzite/detail.png" /></div>
+          </ion-card-content>
+        </ion-card> -->
+
+        <!-- ===========SMALL ICON SLIDES============ -->
+        <div class="breaking-news">
+          <ion-row style="padding-bottom: 0px; padding-top: 0">
+            <ion-col>
+              <ion-text> Explore </ion-text>
+              <div style="height: 2px; width: 30px; background: #1893f8"></div>
+            </ion-col>
+          </ion-row>
+        </div>
+
+        <div class="filter-slides">
+          <ion-slides [options]="options">
+            <ion-slide *ngFor="let i of filterSlides">
+              <div>
+                <ion-thumbnail [routerLink]="[i.url]">
+                  <ion-img src="{{i.img}}"></ion-img>
+                </ion-thumbnail>
+                <ion-text> {{i.name}} </ion-text>
+              </div>
+            </ion-slide>
+          </ion-slides>
+        </div>
+        <br />
+
+        <!-- <ion-card *ngIf="app_info.update">
+  <ion-row text-center>
+      <a color="secondary" item-end [href]="app_info.url" onclick='window.open(this.href,"_system","location=yes"); ' style="text-decoration: none">
+          <img src="https://meebuddy.com/app_files/New_Version.png"/>
+      </a>
+  </ion-row>
+</ion-card>
+<ion-list>
+  <div *ngFor="let cat of categoryData" style="float:left;display:inline;margin:0;padding: 7px;">
+  <img (click)="learnenglish(cat._id,cat.name)" [src]="cat.icon" style="height: 100px;">
+</div>
+</ion-list> -->
+      </div>
+
+      <!-- ============LATEST UPDATES=============== -->
+      <div class="breaking-news">
+        <ion-row>
+          <ion-col size="8">
+            <ion-text> Breaking News </ion-text>
+            <div style="height: 2px; width: 30px; background: #1893f8"></div>
+          </ion-col>
+          <ion-col size="4" style="display: flex; justify-content: flex-end">
+            <p
+              [routerLink]="['/news/allnews']"
+              style="color: #1893f8; cursor: pointer"
+            >
+              See more
+            </p>
+          </ion-col>
+        </ion-row>
+
+
+        <div *ngFor="let slide of all_news_data">
+          <div *ngIf="slide.type=='ImagePost'">
+            <app-image-post
+              [postData]="slide"
+              [newsData]="slide.news"
+              [time]="slide.createdAt"
+              [edit]="{'check':'false'}"
+              [news_id]="slide._id"
+              [type]="{'type':'small'}"
+            ></app-image-post>
+          </div>
+
+          <div *ngIf="slide.type=='VideoPost'">
+            <app-video-post
+              [postData]="slide"
+              [newsData]="slide.news"
+              [time]="slide.createdAt"
+              [edit]="{'check':'false'}"
+              [news_id]="slide._id"
+              [type]="{'type':'small'}"
+            ></app-video-post>
+          </div>
+
+          <div *ngIf="slide.type=='URLPost'">
+            <app-url-post
+              [postData]="slide"
+              [newsData]="slide.news"
+              [time]="slide.createdAt"
+              [edit]="{'check':'false'}"
+              [news_id]="slide._id"
+              [type]="{'type':'small'}"
+            ></app-url-post>
+          </div>
+
+          <div *ngIf="slide.type=='Poll'">
+            <app-poll-post
+              [postData]="slide"
+              [newsData]="slide.news"
+              [time]="slide.createdAt"
+              [news_id]="slide._id"
+              [type]="{'type':'small'}"
+            ></app-poll-post>
+          </div>
+
+          <div *ngIf="slide.type=='Magazine'">
+            <app-magazine-post
+              [postData]="slide"
+              [newsData]="slide.news"
+              [edit]="{'check':'false'}"
+              [time]="slide.createdAt"
+              [news_id]="slide._id"
+              [type]="{'type':'small'}"
+            ></app-magazine-post>
+          </div>
+
+          <div *ngIf="slide.type=='Quiz'">
+            <app-quiz-post
+              [postData]="slide"
+              [newsData]="slide.news"
+              [time]="slide.createdAt"
+              [news_id]="slide._id"
+              [type]="{'type':'small'}"
+            ></app-quiz-post>
+          </div>
+
+          <div *ngIf="slide.type=='Survey'">
+            <app-survey-post
+              [postData]="slide"
+              [newsData]="slide.news"
+              [time]="slide.createdAt"
+              [news_id]="slide._id"
+              [type]="{'type':'small'}"
+            ></app-survey-post>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <ion-row style="margin-top: 50px;">
+>>>>>>> f84c17c890ee0cf4722c6cec319247a078176515
+    <ion-title>News</ion-title>
+    <ion-button size="small" (click)="addNews(false)"
+      >post local news</ion-button
+    >
+  </ion-row>
+
+  <br />
+  <div class="card">
+    <div>
+      <ion-text color="primary">Total</ion-text>
+      <h5 class="center">
+        <b>{{ news.total }}</b>
+      </h5>
+    </div>
+    <div>
+      <ion-text color="success">Verified</ion-text>
+      <h5 class="center">
+        <b>{{ news.verified }}</b>
+      </h5>
+    </div>
+    <div>
+      <ion-text color="danger">Rejected</ion-text>
+      <h5 class="center">
+        <b>{{ news.rejected }}</b>
+      </h5>
+    </div>
+    <div>
+      <ion-text color="warning">Pending</ion-text>
+      <h5 class="center">
+        <b>{{ news.pending }}</b>
+      </h5>
+    </div>
+  </div>
+
+  <br />
+
+  
+  <ion-row>
+    <ion-title>Ads</ion-title>
+    <ion-button size="small" (click)="addNews(true)">post ad</ion-button>
+  </ion-row>
+
+  <br />
+  <div class="card">
+    <div>
+      <ion-text color="primary">Total</ion-text>
+      <h5 class="center">
+        <b>{{ ad.total }}</b>
+      </h5>
+    </div>
+    <div>
+      <ion-text color="success">Verified</ion-text>
+      <h5 class="center">
+        <b>{{ ad.verified }}</b>
+      </h5>
+    </div>
+    <div>
+      <ion-text color="danger">Rejected</ion-text>
+      <h5 class="center">
+        <b>{{ ad.rejected }}</b>
+      </h5>
+    </div>
+    <div>
+      <ion-text color="warning">Pending</ion-text>
+      <h5 class="center">
+        <b>{{ ad.pending }}</b>
+      </h5>
+    </div>
+  </div>
+
+  <br />
+
+
+  <ion-row>
+    <ion-title>Pages</ion-title>
+    <ion-button size="small">Create a page</ion-button>
+  </ion-row>
+
+  <br />
+  <div class="card">
+    <div>
+      <ion-text color="primary">My pages</ion-text>
+      <h5 class="center">
+        <b>{{ pages.mypages }}</b>
+      </h5>
+    </div>
+    <div>
+      <ion-text color="success">Following</ion-text>
+      <h5 class="center">
+        <b>{{ pages.following }}</b>
+      </h5>
+    </div>
+  </div>
+
+  <br />
+  <br />
+  <ion-text color="dark">Want to explore more pages?</ion-text>
+  
+  <ion-searchbar
+    placeholder="Search a page"
+    color="light"
+    (click)="navigateToSearch()"
+  ></ion-searchbar>
+
+  <ion-searchbar placeholder="Search a page" color="light" (click)="navigateToSearch()"></ion-searchbar> -->
+
+</div>
+  </ng-template>
+
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingText="Please wait..."
+      loadingSpinner="bubbles"
+    ></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

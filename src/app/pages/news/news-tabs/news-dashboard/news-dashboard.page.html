@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="myBackButton()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>News</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-text>
+    <h1>News</h1>
+  </ion-text>
+  <ion-button expand="block" color="medium">
+    <ion-label
+      slot="start"
+      class="ion-text-left"
+      routerLink="/news/news-tabs/news-create"
+      >Click to post news
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</ion-label
+    >
+    <ion-icon name="arrow-forward-outline"></ion-icon>
+  </ion-button>
+  <ion-text>
+    <h2>Statistics</h2>
+  </ion-text>
+
+  <div class="card">
+    <div>
+      <h2>Total</h2>
+      <h1 style="text-align: center">{{stats.posted+stats.verified}}</h1>
+    </div>
+    <div>
+      <h2>Verified</h2>
+      <h1 style="text-align: center">{{stats.verified}}</h1>
+    </div>
+    <div>
+      <h2>Rejected</h2>
+      <h1 style="text-align: center">{{stats.posted}}</h1>
+    </div>
+  </div>
+  <ion-text>
+    <h2>My Earnings</h2>
+  </ion-text>
+  <div class="card">
+    <div>
+      <h2>Total</h2>
+      <h1 style="text-align: center">0</h1>
+    </div>
+    <div>
+      <h2>Pay</h2>
+      <h1 style="text-align: center">0</h1>
+    </div>
+  </div>
+</ion-content>

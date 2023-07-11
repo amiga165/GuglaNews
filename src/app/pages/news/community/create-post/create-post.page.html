@@ -1,0 +1,102 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>create-post</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-text>
+        <h2>Select Type</h2>
+    </ion-text>
+    <ion-radio-group value="ImagePost" (ionChange)="type($event)">
+        <div class="card">
+            <div>
+                <ion-icon name="images-outline"></ion-icon>
+                <h3 style="text-align: center">
+                    <ion-radio slot="start" color="success" value="ImagePost"></ion-radio>
+                </h3>
+            </div>
+            <div>
+                <ion-icon name="newspaper-outline"></ion-icon>
+                <h3 style="text-align: center">
+                    <ion-radio slot="start" color="success" value="news"></ion-radio>
+                </h3>
+            </div>
+
+            <div>
+                <ion-icon name="videocam-outline"></ion-icon>
+                <h3 style="text-align: center">
+                    <ion-radio slot="start" color="success" value="VideoPost">
+                    </ion-radio>
+                </h3>
+            </div>
+
+            <div>
+                <ion-icon name="logo-youtube"></ion-icon>
+                <h3 style="text-align: center">
+                    <ion-radio slot="start" color="success" value="youtube"></ion-radio>
+                </h3>
+            </div>
+        </div>
+    </ion-radio-group>
+
+    <ion-list>
+        <ion-text>
+            <h2>Community News Data</h2>
+        </ion-text>
+        <ion-item>
+            <!-- <ion-label position="stacked">News Heading</ion-label> -->
+            <ion-input [(ngModel)]="formdata.title" placeholder="Heading" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <!-- <ion-label position="stacked">News</ion-label> -->
+            <ion-textarea [(ngModel)]="formdata.description" height="250px" autoGrow="true" placeholder="Enter news content"></ion-textarea>
+        </ion-item>
+
+        <ion-item *ngIf="formdata.video_type=='youtube'">
+            <!-- <ion-label position="stacked">News</ion-label> -->
+            <ion-textarea [(ngModel)]="formdata.description" height="250px" autoGrow="true" placeholder="Enter youtube link"></ion-textarea>
+        </ion-item>
+    </ion-list>
+
+    <ion-button expand="block" *ngIf="formdata.video_type!='youtube'">
+        <!-- Upload Image &nbsp;&nbsp; -->
+        <input type="file" (change)="onImageSelected($event)" />
+        <ion-icon name="cloud-upload-outline"></ion-icon>
+    </ion-button>
+
+    <!-- <ion-button expand="block">
+        Upload Image &nbsp;&nbsp;
+        <ion-icon name="cloud-upload-outline"></ion-icon>
+    </ion-button> -->
+
+    <!-- <ion-item *ngFor="let i of community_members">
+        <ion-label>{{i.name}}</ion-label>
+        <ion-checkbox slot="start">
+        </ion-checkbox>
+    </ion-item> -->
+
+    <ion-radio-group *ngIf="community_members.length" value="" (ionChange)="level($event)">
+        <ion-item *ngFor="let i of community_members">
+            <ion-radio slot="start" value="{{i._id}}"></ion-radio>
+            <ion-label>{{i.name}}</ion-label>
+        </ion-item>
+    </ion-radio-group>
+    <h2 *ngIf="!community_members.length">You have no community to post.</h2>
+</ion-content>
+
+<ion-footer>
+    <ion-list>
+        <ion-item>
+            <ion-label (click)="terms_modal()">Terms & Conditions</ion-label>
+            <ion-checkbox (ionChange)="terms()" slot="start"> </ion-checkbox>
+            <ion-buttons slot="end" (click)="submit()">
+                <ion-button>Post </ion-button>
+            </ion-buttons>
+        </ion-item>
+    </ion-list>
+</ion-footer>

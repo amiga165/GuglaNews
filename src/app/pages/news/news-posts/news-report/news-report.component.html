@@ -1,0 +1,86 @@
+<ion-content [scrollEvents]="true">
+
+    <ion-item style="padding: 16px 0 0 0;" lines="full">
+      <ion-icon name="alert-circle"></ion-icon>
+      <h2 style="margin: 0 0 0 10px;">
+        Report Mistake
+      </h2>
+      <ion-buttons style="position: absolute; right: 8px">
+        <ion-button (click)="dismissModal()"
+          ><ion-icon style="font-size: 24px;" name="close"></ion-icon
+        ></ion-button>
+      </ion-buttons>
+    </ion-item>
+  <div class="report-mistake">
+    <ion-list class="ion-margin">
+      <!-- <ion-radio-group [allowEmptySelection]="true" value="turtles"> -->
+      <h3>Please select a problem with this post</h3>
+      <ion-radio-group (ionChange)="type($event)">
+        <ion-item lines="full">
+          <ion-label>Vulgar Content</ion-label>
+          <ion-radio slot="start" value="Vulgar Content"></ion-radio>
+        </ion-item>
+  
+        <ion-item lines="full">
+          <ion-label>Copyright violation</ion-label>
+          <ion-radio slot="start" value="Copyright violation"></ion-radio>
+        </ion-item>
+  
+        <ion-item lines="full">
+          <ion-label>Hateful statements</ion-label>
+          <ion-radio slot="start" value="Hateful statements"></ion-radio>
+        </ion-item>
+  
+        <ion-item lines="full">
+          <ion-label>Fake/Misleading</ion-label>
+          <ion-radio slot="start" value="Fake/Misleading"></ion-radio>
+        </ion-item>
+  
+        <ion-item lines="full">
+          <ion-label>Biased story</ion-label>
+          <ion-radio slot="start" value="Biased story"></ion-radio>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-label>Other</ion-label>
+          <ion-radio slot="start" value="Other"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+  
+    <ion-list class="ion-margin">
+      <h3>Please share any other details that can help us (optional)</h3>
+      <div>
+        <ion-textarea
+          rows="2"
+          maxlength="400"
+          placeholder="Enter more information here..."
+          [(ngModel)]="formData.description"
+        ></ion-textarea>
+      </div>
+    </ion-list>
+
+    <ion-list class="ion-margin">
+      <h3>Please share your contact info (optional)</h3>
+      <ion-item style="border: 1px solid #9d9fa6;" lines="none">
+        <ion-input [(ngModel)]="formData.contact_info" maxlength="75" placeholder="Email/Phone" type="text"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div style="display: flex; justify-content: center; align-items: center">
+      <button 
+        class="btn-inner-1" 
+        style="width: 100%;
+        padding: 10px;
+        margin: 10px 16px;
+        border-radius: 0px;
+        font-size: 14px;
+        font-weight: 500;" 
+        expand="block"
+        (click)="submit()"
+      >
+        Send Report
+      </button>
+    </div>
+  </div>
+</ion-content>

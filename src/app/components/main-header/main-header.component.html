@@ -1,0 +1,48 @@
+<ion-header class="headerTitle">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button id="shopping" (click)="openmenu()"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-no-padding headerTitle">
+      <h1>
+        MeeBuddy
+      </h1>
+      <p
+        style="padding: 0%; margin: 0; font-size: 0.6em"
+        (click)="updateLocation()"
+      >
+        <ion-icon name="locate" style="position: relative; top: 2px"></ion-icon
+        >&nbsp;{{ center.location.village }}
+      </p>
+    </ion-title>
+
+    <ion-buttons slot="end" (click)="searchPage()">
+      <ion-button>
+        <ion-icon name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" (click)="favItems()">
+      <ion-button>
+        <ion-icon name="heart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" id="notification-button" (click)="cartPage()">
+      <ion-tab-button>
+        <ion-icon id="notification-icon" name="cart"></ion-icon>
+        <ion-label></ion-label>
+        <ion-badge *ngIf="user.cart.count" color="tertiary">{{
+          user.cart.count
+        }}</ion-badge>
+      </ion-tab-button>
+    </ion-buttons>
+
+    <ion-buttons *ngIf="isGuest()" slot="end" (click)="login()">
+      <ion-button class="ios-btn">
+       login
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>

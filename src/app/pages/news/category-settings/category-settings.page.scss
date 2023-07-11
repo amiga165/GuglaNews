@@ -1,0 +1,12 @@
+.cat-header{
+    display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          color: var(--ion-color-medium-tint);
+          border-bottom: 1px solid #9d9fa6;
+    p{
+        margin: 10px 8px;
+        font-weight: 500;
+    }
+}

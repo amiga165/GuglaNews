@@ -1,0 +1,136 @@
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.head-vid {
+    position: absolute;
+    top: 0;
+    height: 40%;
+    width: 100%;
+}
+
+.head-vid iframe {
+    height: 100%;
+    width: 100%;
+}
+
+.head-vid ion-slides {
+    height: 100%;
+    width: 100%;
+}
+
+
+.head-vid video {
+    height: 100%;
+    width: 100%;
+}
+
+.content {
+    width: 100%;
+    position: absolute;
+    top: 40%;
+    height: 48.5%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 12px;
+    background: var(--ion-background-color);
+    z-index: 2;
+}
+
+.profile_icon
+{
+    max-height: 40px;
+    object-fit: cover;
+     border-radius: 50%;
+     border: 1px solid #ffffff57;
+}
+
+.badge{
+    margin-left: 5px;
+    height: 10px;
+    width: 10px;
+    padding:1px;
+    color: #fff;
+    background: #3880ff;
+    border-radius: 50%;  
+  }
+  
+.ads{
+    height: 10%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    bottom: 8%;
+    img{
+        height: 100%;
+        width: 100%;
+    }
+}
+.swiper-slide {
+    display: block;
+}
+
+.swiper-slide img {
+    height: 100%;
+    width: 100%;
+}
+
+.swiper-slide img {
+    max-height: 100%;
+    max-width: 100%;
+    pointer-events: none;
+}
+
+.swiper-pagination {
+    position: fixed;
+    bottom: 0px;
+    padding-bottom: 3px;
+}
+
+
+
+.leveldiv{
+    position: absolute;
+    top: -55px;
+    z-index: 100;
+    background: #0d0d0d87;
+    color: white;
+    font-size: .7em;
+    right: 0px;
+    padding: 1px 8px;
+    border-radius: 10px 0px 0px 10px;    
+}
+
+    .timeStamp{
+        position: absolute;
+        bottom: 7%;
+        z-index: 0;
+        color: var(--ion-color-medium-tint);
+        font-size: 10px;
+        left: 0px;
+        padding: 1px 8px;
+        border-radius: 10px 0px 0px 10px;
+        ion-icon{
+            margin-bottom: -2px;
+            margin-right: 2px;
+            font-size: 12px;
+    
+        }
+    }
+s
+.category{
+    color: white;
+    left: 0px;
+    position: absolute;
+    top: -25px;
+    z-index: 100;
+    font-size: .7em;
+    background-color: #0d0d0d87;
+    padding: 1px 8px;
+    border-radius: 0px 10px 10px 0px;    
+}
+
+

@@ -1,0 +1,125 @@
+<ion-content>
+<!-- <div class="grid_type" *ngIf="preloader; else newsblock">
+        <ion-card>
+            <ion-skeleton-text animated style="height:160px"></ion-skeleton-text>
+        </ion-card>
+        <ion-grid>
+            <ion-row class="ion-no-padding" *ngFor="let i of [0]">
+                <ion-col *ngFor="let j of [0]">
+                    <ion-skeleton-text animated style="width:100%"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width:100%"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width:100%"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width:100%"></ion-skeleton-text>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+<ng-template #newsblock>
+    <div class="wrapper">
+      // CREATE OWN GROUP
+      <ion-row class="create-group-btn" >
+        <ion-col size="12">
+          <ion-buttons (click)="createCommunityModal()">
+            <ion-button><ion-icon slot="start" name="add-outline"></ion-icon>Create New Group</ion-button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+      
+      // Pages you Follow 
+      <ion-row class="follow-pages">
+          <ion-item  detail *ngFor="let owned of owned_community" (click)="viewpage(owned._id)">
+            <ion-thumbnail>
+              <ion-img *ngIf="owned.icon" src="{{owned.icon}}"></ion-img>
+              <ion-img *ngIf="!owned.icon" src="https://meebuddy.com/app_files/meebuddy.png"></ion-img>
+            </ion-thumbnail>
+            <ion-label class="ion-no-margin ion-no-padding">
+              <ion-text class="wrap-text">
+                {{owned.name}} 
+                <ion-icon class="badge" name="checkmark-sharp" *ngIf="owned.green_icon"></ion-icon>
+              </ion-text>
+              <p class="wrap-text">{{owned.members.length}} members | {{owned.posts.length}} posts  </p>
+            </ion-label>
+            // <ion-buttons>
+              <ion-button slot="end" size="small">join</ion-button>
+            </ion-buttons> 
+          </ion-item>
+      </ion-row>
+  
+  
+  
+      // following pages 
+      <ion-row>
+        <ion-title class="title"
+          >Communititess <br /><span class="subtitle"
+            >&nbsp;Pages you following...</span
+          ></ion-title
+        >
+        <div class="essentials">
+          <ion-icon name="add-circle-outline" (click)="createCommunityModal()"></ion-icon>
+          <ion-icon name="search-outline" (click)="search()" ></ion-icon>
+        </div>
+      </ion-row>
+      <br />
+  
+      // loop of following pages 
+      <div class="div-slides">
+        <div *ngFor="let follow of following_community" (click)="navigateToCommunityPage(follow._id)" class="slide">
+          <img *ngIf="follow.icon" src="{{follow.icon}}">
+          <img *ngIf="!follow.icon" src="https://meebuddy.com/app_files/meebuddy.png">
+          <p class="slide-title">{{follow.name}}
+          <ion-icon class="badge" name="checkmark-sharp" *ngIf="follow.green_icon"></ion-icon>
+            
+            </p>
+        </div>
+      </div>
+      <br />
+      <br />
+  
+      // suggested pages 
+      <ion-row>
+        <ion-title class="title"
+          >suggested for you <br /><span class="subtitle"
+            >You might be interested in.</span
+          ></ion-title
+        >
+        <a class="ion-margin">see all</a>
+      </ion-row>
+      <br />
+      // loop of suggested pages 
+      <div class="suggested-slides">
+        <div *ngFor="let suggest of suggested_community" (click)="viewpage(suggest._id)" class="slide">
+          <img *ngIf="suggest.icon" src="{{suggest.icon}}" />
+          <img *ngIf="!suggest.icon" src="https://meebuddy.com/app_files/meebuddy.png" />
+  
+          <div class="desc">
+            <p style="all: unset; font-size: 12px; padding-left: 3px; padding-top: 10px;">
+              {{suggest.name}}
+              <ion-icon class="badge" name="checkmark-sharp" *ngIf="suggest.green_icon"></ion-icon>
+              
+            </p>
+  
+            <app-community-follow-button [community_id]="suggest._id"></app-community-follow-button>
+          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+  
+      // feed 
+      <ion-row>
+        <ion-title class="title">your feed</ion-title>
+      </ion-row>
+      <br />
+      // loop of feeds 
+      <ion-card style="margin: 10px 0" *ngFor="let news of newsData">
+        <app-image-post  [edit]="{'check':'false'}"  [newsData]="news.news" [news_id]="news._id" [type]="{'type':'small'}"  *ngIf="news.type=='ImagePost'"></app-image-post>
+    
+      </ion-card>
+     
+    </div>
+  
+
+</ng-template> -->
+
+<app-no-data-found [name]="noData" ></app-no-data-found>
+  </ion-content>

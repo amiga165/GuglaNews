@@ -1,0 +1,8 @@
+{
+	"plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false,
+      "showSpinner": true
+    }
+  	}
+}

@@ -1,0 +1,103 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Post News</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-text>
+        <h2>Select Type</h2>
+    </ion-text>
+    <ion-radio-group value="ImagePost" (ionChange)="type($event)">
+        <div class="card">
+            <div>
+                <ion-icon name="images-outline"></ion-icon>
+                <h3 style="text-align: center">
+                    <ion-radio slot="start" color="success" value="ImagePost"></ion-radio>
+                </h3>
+            </div>
+            <div>
+                <ion-icon name="newspaper-outline"></ion-icon>
+                <h3 style="text-align: center">
+                    <ion-radio slot="start" color="success" value="news"></ion-radio>
+                </h3>
+            </div>
+
+            <div>
+                <ion-icon name="videocam-outline"></ion-icon>
+                <h3 style="text-align: center">
+                    <ion-radio slot="start" color="success" value="VideoPost">
+                    </ion-radio>
+                </h3>
+            </div>
+
+            <div>
+                <ion-icon name="logo-youtube"></ion-icon>
+                <h3 style="text-align: center">
+                    <ion-radio slot="start" color="success" value="youtube"></ion-radio>
+                </h3>
+            </div>
+        </div>
+    </ion-radio-group>
+
+    <ion-list>
+        <ion-text>
+            <h2>News Data</h2>
+        </ion-text>
+        <ion-item>
+            <!-- <ion-label position="stacked">News Heading</ion-label> -->
+            <ion-input [(ngModel)]="formdata.title" maxlength="75" placeholder="Heading" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <!-- <ion-label position="stacked">News</ion-label> -->
+            <ion-textarea [(ngModel)]="formdata.description" height="350px" autoGrow="true" placeholder="Enter news content" maxlength="400"></ion-textarea>
+        </ion-item>
+
+        <ion-item *ngIf="formdata.video_type=='youtube'">
+            <!-- <ion-label position="stacked">News</ion-label> -->
+            <ion-textarea [(ngModel)]="formdata.videos[0]" height="250px" autoGrow="true" placeholder="Enter youtube link"></ion-textarea>
+        </ion-item>
+    </ion-list>
+    <ion-button expand="block" (click)="fromGallery()" *ngIf="formdata.video_type!='youtube'">
+        <ion-icon name="cloud-upload-outline"></ion-icon>
+    </ion-button>
+
+    <ion-item>
+        <ion-thumbnail *ngFor="let i of imgs">
+            <img [src]="'data:image/jpeg;base64,' + i" />
+        </ion-thumbnail>
+    </ion-item>
+
+    <ion-radio-group value="mandal" (ionChange)="level($event)">
+        <ion-item>
+            <ion-radio slot="start" value="mandal"></ion-radio>
+            <ion-label>Mandal &nbsp; ({{center.location.mandal}})</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-radio slot="start" value="district"></ion-radio>
+            <ion-label>District &nbsp; ({{center.location.district}})</ion-label>
+        </ion-item>
+    </ion-radio-group>
+    <!-- <ion-item>
+        <ion-label>District</ion-label>
+        <ion-checkbox slot="start">
+        </ion-checkbox>
+    </ion-item> -->
+</ion-content>
+
+<ion-footer>
+    <ion-list>
+        <ion-item>
+            <ion-label style="color: rgb(104, 104, 235)" (click)="terms_modal()">Terms & Conditions</ion-label>
+            <ion-checkbox (ionChange)="terms()" slot="start"> </ion-checkbox>
+            <ion-buttons slot="end" (click)="submit()">
+                <ion-button>Post </ion-button>
+            </ion-buttons>
+        </ion-item>
+    </ion-list>
+    <button type=reset class='btn' style="height:0px; width:0px;"></button>
+</ion-footer>

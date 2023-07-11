@@ -1,0 +1,159 @@
+.back {
+  background-color: #0086f8;
+  padding: 1em 1em 0 1em;
+  ion-icon {
+    color: #000000;
+    background: #ffc0cb73;
+    border-radius: 50%;
+    padding: 5px;
+  }
+}
+.user-info {
+  padding: 2em 0;
+  width: 100%;
+  height: 250px;
+  background-color: #0086f8;
+  border-bottom-left-radius: 25%;
+  border-bottom-right-radius: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  .user-icon {
+    height: 75px;
+    width: 75px;
+    border: 2px solid #eee;
+    border-radius: 50%;
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+    .badge {
+      display: flex;
+      justify-content: end;
+      position: relative;
+      top: -14px;
+      ion-icon {
+        font-size: 20px;
+      }
+    }
+    .badge .myIcon {
+      height: 0;
+      width: 0;
+    }
+    .badge .myIcon::-webkit-file-upload-button {
+      visibility: hidden;
+    }
+  }
+  .user-data {
+    all: unset;
+    color: #eee;
+  }
+  .user-edit {
+    width: 75%;
+    margin: 14px auto 0;
+    text-align: center;
+  }
+  .user-name {
+    font-size: 1.2em;
+    text-transform: capitalize;
+  }
+  ion-icon {
+    color: #000000;
+    background: #ffc0cb73;
+    border-radius: 50%;
+    padding: 5px;
+  }
+  .pencil {
+    padding: 3px;
+    position: relative;
+    top: 5px;
+    left: 5px;
+  }
+}
+
+.card {
+  width: 100%;
+  height: 14%;
+  border-radius: 12px;
+  align-items: center;
+  margin-bottom: 1%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  box-shadow: 0 4px 8px 0 rgba(100, 97, 97, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  position: relative;
+  top: -4em;
+  width: 90%;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.center {
+  text-align: center;
+  margin: 0 0 5px !important;
+}
+
+.card2 {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 1%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(100, 97, 97, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  position: relative;
+  top: -4em;
+  width: 90%;
+  margin: 0 auto;
+  background: #fff;
+  padding: 10px;
+  ion-icon {
+    font-size: 1.3em;
+    position: relative;
+    top: 3px;
+  }
+}
+.border{
+  height: 3px;
+  width: 60px;
+  background: #0086f8;
+  margin-top: -16px;
+  margin-bottom: 12px;    
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+h4 {
+  margin: 0;
+}
+
+.arrow {
+  font-size: 0.9em !important;
+  position: relative;
+  top: 4px;
+  color: #0085ff;
+}
+
+.toggle {
+  zoom: 0.8;
+}
+
+.space {
+  padding: 2px 0;
+}
+
+.blue {
+  color: #0085ff;
+}
+
+.version {
+  text-align: center;
+}

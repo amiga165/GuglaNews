@@ -1,0 +1,80 @@
+.survey{
+    height: 80%;
+    width: 100%;
+    overflow-y: scroll;
+    text-align: left;
+
+    // h2{
+    //     padding: 0 0 0 16px;
+    //     background-color: #3880ff; 
+    //     margin: 0;
+    //     color: white;
+    //     height: 45px;
+    //     width: 100%;
+    //     line-height: 45px;
+    // }
+    div{
+        margin-bottom: 20px;
+    }
+}
+
+p{
+    padding: 5px;
+    font-size: 1em;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.input-field{
+    margin-bottom: 10px;
+    margin-top: 10px;
+   
+    ion-input {
+        border: 1px solid lightgray;
+        border-radius: 2px;
+    }
+   
+}
+
+ion-textarea{
+    border: 1px solid lightgray;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 10px 5px;
+    .textarea-wrapper{
+        min-width: unset;
+        max-width: unset;
+        min-height: unset;
+        max-height: unset;
+        height: 100%;
+      }
+}
+
+.select-field{
+    ion-select{
+      border-radius: 2x;
+      border: 1px solid lightgray;
+    }
+    ion-label{
+        margin-bottom: 15px;
+    }
+}
+
+.radio-field{
+    ion-item{
+        border-radius: 50px;
+        border: 1px solid lightgray;
+        height: 40px;
+        display: flex;
+        margin-bottom: 10px;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    }
+}
+
+.wrap{
+    text-overflow:ellipsis;
+    overflow:hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+}

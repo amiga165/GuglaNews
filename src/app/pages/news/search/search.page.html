@@ -1,0 +1,100 @@
+<ion-content>
+
+    <div style="padding: 16px;">
+
+    
+        <div class="search_bar">
+            <div>
+                <button (click)="myBackButton()">
+                    <ion-icon name="arrow-back-outline"></ion-icon>
+                </button>
+            </div>
+            <div>
+                <ion-input
+                    (ionChange)="result($event)"
+                    placeholder="Search for posts"
+                    ><ion-icon name="search"></ion-icon
+                ></ion-input>
+            </div>
+        </div>
+
+    <ion-list>
+
+
+        <ion-list>
+            <div *ngFor="let feat of features" class="categories-list">
+                <ion-chip >
+                    <img [src]="feat.avatar" alt="icon">
+                    <ion-label >{{feat.name}}</ion-label>
+                </ion-chip>
+            </div>
+        </ion-list>
+
+
+        <ion-list>
+            <div><div style="width: 100%;height: 1px;background: #dcdbdb;"></div></div>
+            <div>
+                <p style="margin: 10px 8px;font-weight: 500;color: var(--ion-color-medium-tint);">Categories</p>
+            </div>
+            <div *ngFor="let catgy of categoryData" class="categories-list">
+                <ion-chip 
+                    (click)="view_category(catgy._id,catgy.name)"
+                >
+                    <img src="assets/post/Image.svg" alt="icon">
+                    <ion-label >{{catgy.name}}</ion-label>
+                </ion-chip>
+            </div>
+        </ion-list>
+
+
+
+
+        <!-- <app-no-data-found [name]="{'name':'Will Update Soon'}"></app-no-data-found> -->
+
+        <!-- <ion-item 
+                    style="cursor: pointer;" 
+                    lines="full" 
+                    *ngFor="let item of result_list" 
+                    (click)="comm_page(item._id)"
+                    >
+                    <ion-thumbnail class="ion-margin-end">
+                    
+                        <ion-img  src="https://meebuddy.com/app_files/meebuddy.png"></ion-img>
+                    </ion-thumbnail>
+                    <ion-label class="ion-no-padding ion-align-items-center">
+                        <ion-text>&nbsp;&nbsp;{{item.name}}
+                        <ion-icon class="badge" name="checkmark-sharp" *ngIf="item.green_icon"></ion-icon>
+                
+            </ion-text>
+                        <app-community-follow-button [community_id]="item._id"></app-community-follow-button>
+                    </ion-label>
+                </ion-item>
+
+                <div *ngIf="!result_list.length && !search_key">
+                    <ion-item
+                        style="cursor: pointer;" 
+                        lines="full"  
+                        *ngFor="let suggest of suggested_community"
+                        (click)="comm_page(suggest._id)"
+                        >
+                        <ion-thumbnail  class="ion-margin-end">
+                            <img *ngIf="suggest.icon" src="{{suggest.icon}}" />
+                            <img *ngIf="!suggest.icon" src="https://meebuddy.com/app_files/meebuddy.png" />
+                        </ion-thumbnail>
+                        <ion-label class="ion-no-padding ion-align-items-center">
+                        <ion-text>&nbsp;&nbsp;{{suggest.name}}
+                        <ion-icon class="badge" name="checkmark-sharp" *ngIf="suggest.green_icon"></ion-icon>
+                
+            </ion-text>
+                        <app-community-follow-button [community_id]="suggest._id"></app-community-follow-button>
+                        </ion-label>
+    
+                    </ion-item> 
+                </div>
+
+                <div class="ion-no-margin" *ngIf="!result_list.length && search_key">
+                    <app-no-data-found [name]="{'name':'COMMUNITY'}" ></app-no-data-found>
+                </div>  -->
+    </ion-list>
+    </div>
+</ion-content>

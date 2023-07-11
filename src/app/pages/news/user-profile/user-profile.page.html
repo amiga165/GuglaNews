@@ -1,0 +1,202 @@
+<!-- (click)="updating()" line 8 -->
+<ion-content>
+  <ion-row class="back" (click)="back()">
+    <ion-icon name="chevron-back"></ion-icon>
+  </ion-row>
+  <div class="user-info">
+    <div class="user-icon">
+      <img
+        
+        src="https://flyclipart.com/thumb2/account-avatar-client-person-profile-user-icon-196361.png"
+        alt=""
+      />
+      <!-- <div class="badge">
+        <ion-icon name="camera-outline" (click)="f.click()"></ion-icon>
+        <input type="file" class="ion-hide" #f class="myIcon" />
+      </div> -->
+    </div>
+    <br />
+    <div class="user-edit">
+      <h3 class="user-name user-data">
+        {{user_details.details.name}}
+        <!-- hello user -->
+      </h3>
+      <ion-icon (click)="edit_modal_popup()" class="pencil" name="pencil"></ion-icon>
+    </div>
+    <h3 class="user-phone user-data">{{user_details.mobile}}</h3>
+  </div>
+
+  <!-- stats -->
+  <div class="card">
+    <div>
+      <ion-text color="primary">Total</ion-text>
+      <h5 class="center">
+        <b>{{mystatsdata.verified+mystatsdata.rejected+mystatsdata.posted}}</b>
+      </h5>
+    </div>
+    <div>
+      <ion-text color="warning">Pending</ion-text>
+      <h5 class="center">
+        <b>{{mystatsdata.posted}}</b>
+      </h5>
+    </div>
+
+    <div>
+      <ion-text color="success">Verified</ion-text>
+      <h5 class="center">
+        <b>{{mystatsdata.verified}}</b>
+      </h5>
+    </div>
+    
+    <div>
+      <ion-text color="danger">Rejected</ion-text>
+      <h5 class="center">
+        <b>{{mystatsdata.rejected}}</b>
+      </h5>
+    </div>
+    
+  </div>
+
+  <!-- personal details -->
+  <br />
+  <div class="card2">
+    <h2>Personal Details</h2>
+    <div class="border"></div>
+    <!-- Email -->
+    <div class="row">
+      <ion-row>
+        <ion-icon name="mail-open"></ion-icon>&nbsp;&nbsp;
+        <h4>Email</h4>
+      </ion-row>
+      <ion-row>
+        <h5 class="ion-text-end blue">{{user_details.details.email}}</h5>
+        &nbsp;
+        <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+      </ion-row>
+    </div>
+    <!-- location -->
+    <div class="row">
+      <ion-row>
+        <ion-icon name="location"></ion-icon>&nbsp;&nbsp;
+        <h4>Location</h4>
+      </ion-row>
+      <ion-row (click)="navigateToWelcomePage()">
+        <h5 class="ion-text-end blue">{{ center.location.village }}</h5>
+        &nbsp;
+        <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+      </ion-row>
+    </div>
+    <!-- language -->
+    <div class="row">
+      <ion-row>
+        <ion-icon name="language"></ion-icon>&nbsp;&nbsp;
+        <h4>Language</h4>
+      </ion-row>
+      <ion-row (click)="updating()">
+        <h5 class="ion-text-end blue">English</h5>
+        &nbsp;
+        <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+      </ion-row>
+    </div>
+  </div>
+
+  <!-- app settings -->
+  <br />
+  <div class="card2">
+    <h2>App settings</h2>
+    <div class="border"></div>
+    <!-- notifications -->
+    <div class="row">
+      <ion-row>
+        <ion-icon name="notifications"></ion-icon>&nbsp;&nbsp;
+        <h4>Notification</h4>
+      </ion-row>
+      <ion-toggle class="toggle"></ion-toggle>
+    </div>
+    <!-- night mode -->
+    <div class="row">
+      <ion-row>
+        <ion-icon name="cloudy-night"></ion-icon>&nbsp;&nbsp;
+        <h4>Night mode</h4>
+      </ion-row>
+      <ion-toggle
+            class="toggle"
+            (ionChange)="Toggletheme($event)"
+            [checked]="commin.isDarkTheme"
+           
+          ></ion-toggle>
+    </div>
+    <!-- auto play -->
+    <div class="row">
+      <ion-row>
+        <ion-icon name="play"></ion-icon>&nbsp;&nbsp;
+        <h4>Video Auto Play</h4>
+      </ion-row>
+      <ion-toggle class="toggle"></ion-toggle>
+    </div>
+  </div>
+  <br />
+
+  <!-- contact us -->
+  <div class="card2">
+    <h2>Contact us</h2>
+    <div class="border"></div>
+    <!-- about us -->
+    <div class="row space">
+      <ion-row>
+        <ion-icon name="alert-circle"></ion-icon>&nbsp;&nbsp;
+        <h4>About us</h4>
+      </ion-row>
+      <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+    </div>
+    <!-- contact -->
+    <div class="row space">
+      <ion-row>
+        <ion-icon name="call"></ion-icon>&nbsp;&nbsp;
+        <h4>Contact</h4>
+      </ion-row>
+      <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+    </div>
+    <!-- your response -->
+    <div class="row space">
+      <ion-row>
+        <ion-icon name="mail-unread"></ion-icon>&nbsp;&nbsp;
+        <h4>Your Response</h4>
+      </ion-row>
+      <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+    </div>
+    <!-- terms & conditions -->
+    <div class="row space">
+      <ion-row>
+        <ion-icon name="document-text"></ion-icon>&nbsp;&nbsp;
+        <h4>Terms & Conditions</h4>
+      </ion-row>
+      <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+    </div>
+  </div>
+  <br />
+  <div class="card2">
+
+    <div class="row">
+      <ion-row (click)="logout(true)">
+        <ion-icon name="trash"></ion-icon>&nbsp;&nbsp;
+        <h4>Delete Account</h4>
+      </ion-row>
+      <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+    </div>
+    </div>
+  <br />
+  <div (click)="logout(false)" class="card2">
+    <div class="row">
+      <ion-row (click)="logout(false)">
+        <ion-icon name="log-out"></ion-icon>&nbsp;&nbsp;
+        <h4>logout</h4>
+      </ion-row>
+      <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+    </div>
+  </div>
+  
+    <p class="center">App Version 1.1.1</p>
+
+  <br />
+</ion-content>
